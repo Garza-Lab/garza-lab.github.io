@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="_ds/nocturne-a0cb5939-c0d1-4846-9787-40fec86d5f64/styles.css">
+<script src="_ds/nocturne-a0cb5939-c0d1-4846-9787-40fec86d5f64/_ds_bundle.js"></script>
+<style>
+/* Light ground: the Nocturne roles and ramp steps re-pointed for a white page,
+   same hues and perceptual steps, inverted direction. */
+:root{
+  --color-bg:#fbfbfe;
+  --color-surface:#f3f5fe;
+  --color-text:#20222a;
+  --color-divider:color-mix(in srgb, #292b31 14%, transparent);
+  --color-accent:#20222a;
+  --color-neutral-300:#4b4f5c;
+  --color-neutral-400:#595d6c;
+  --color-neutral-500:#6b6f80;
+  --color-neutral-800:#d7dae8;
+  --color-accent-400:#4b4f5c;
+  --color-accent-600:#20222a;
+  --color-accent-700:#8d92a3;
+  --shadow-sm:0 0 0 1px #e4e7f5;
+}
+html,body{margin:0;background:var(--color-bg);color:var(--color-text);font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+html,body,h1,h2,h3,h4,p,a,div,span,figcaption,em,strong,main,nav,footer,section{font-family:"Helvetica Neue","Helvetica","Arial",sans-serif}
+a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-text);text-decoration:underline}
+*{box-sizing:border-box}img{display:block;max-width:100%}
+::selection{background:color-mix(in srgb, var(--color-text) 18%, transparent)}
+:focus{outline:none}:focus-visible{outline:2px solid var(--color-accent);outline-offset:2px}
+/* Site animation: blocks fade in individually as they enter the viewport (no load splash). */
+.site-anim main [data-anim="pre"]{opacity:0}
+.site-anim main [data-anim="in"]{opacity:1;transition:opacity var(--anim-dur,.9s) ease var(--anim-delay,0s)}
+</style>
+<script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
+</helmet>
+<div style="min-height:100vh;display:flex;flex-direction:column;background:var(--color-bg);color:var(--color-text)">
+
+<nav style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;padding:14px 32px;background:color-mix(in srgb, var(--color-bg) 85%, transparent);backdrop-filter:blur(12px);max-width:1200px;width:100%;margin:0 auto">
+  <a href="#home" onClick="{{ go.home }}" style="font-weight:500;font-size:19px;letter-spacing:-.01em;color:var(--color-text);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:10px">Garza Lab</a>
+  <a href="#home" onClick="{{ go.home }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.home }}" style-hover="text-decoration:underline">Home</a>
+  <a href="#research" onClick="{{ go.research }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.research }}" style-hover="text-decoration:underline">Research</a>
+  <a href="#team" onClick="{{ go.team }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.team }}" style-hover="text-decoration:underline">Team</a>
+  <a href="#publications" onClick="{{ go.publications }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.publications }}" style-hover="text-decoration:underline">Publications</a>
+  <a href="#news" onClick="{{ go.news }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.news }}" style-hover="text-decoration:underline">News</a>
+  <a href="#contact" onClick="{{ go.contact }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.contact }}" style-hover="text-decoration:underline">Contact</a>
+</nav>
+
+<main ref="{{ mainRef }}" style="flex:1;width:100%">
+
+<!-- ═══ HOME · A ═══ -->
+<sc-if value="{{ isHomeA }}" hint-placeholder-val="{{ true }}">
+<div data-screen-label="Home A" style="max-width:1200px;margin:0 auto;padding:0 32px">
+  <section style="margin-inline:calc(50% - 50vw);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px 56px;align-items:center;padding:32px 32px 40px">
+    <figure style="margin:0">
+      <img src="uploads/opt/Cover Art.jpg" alt="Molecular dynamics of the LRP1–fibrinogen interaction" style="width:100%;height:auto;max-height:90vh;object-fit:contain;object-position:left center">
+    </figure>
+    <div style="padding:40px max(32px, calc(50vw - 568px)) 40px 0">
+      <h1 style="font-size:clamp(48px,7vw,104px);font-weight:500;line-height:.94;letter-spacing:-.018em;font-kerning:normal;font-feature-settings:'kern' 1;margin:0 0 24px">Garza Lab</h1>
+      <div style="font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:var(--color-neutral-300)">
+        <div style="color:var(--color-text);font-size:clamp(22px,3vw,40px);font-weight:500;line-height:1.05;letter-spacing:-.025em;margin-bottom:10px">Pomona College</div>
+        <div>Department of Chemistry</div>
+        <div>Claremont, California</div>
+      </div>
+    </div>
+  </section>
+
+  <section style="margin-inline:calc(50% - 50vw);padding:80px max(32px, calc(50vw - 568px));background:#000;color:#fbfbfe">
+    <div style="max-width:900px">
+      <h2 style="font-size:clamp(40px,6vw,76px);font-weight:500;line-height:1.02;letter-spacing:-.03em;margin:0 0 28px">Computational Biophysics</h2>
+      <p style="font-size:clamp(20px,2.4vw,30px);line-height:1.4;margin:0;max-width:900px;text-wrap:pretty">Leveraging computational chemistry to study protein conformational dynamics and design novel therapeutics for complex biological targets.</p>
+    </div>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:64px 0;display:flex;flex-wrap:wrap;gap:28px 40px;align-items:flex-start">
+    <div style="flex:1 1 240px;min-width:0">
+      <h2 style="font-size:28px;font-weight:500;line-height:1.15;letter-spacing:-.015em;margin:0">Front cover articles</h2>
+    </div>
+    <div style="flex:2 1 300px;min-width:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px">
+      <a href="https://doi.org/10.1002/ntls.70012" target="_blank" style="display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--color-text)">
+        <div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);aspect-ratio:3/4"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/nat-sci-covid.jpg" alt="Natural Sciences cover" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-500)">Natural Sciences · 2025</div>
+        <div style="font-size:15px;font-weight:500;line-height:1.3">Copper(II) Inhibition of the SARS-CoV-2 Main Protease</div>
+      </a>
+      <a href="https://doi.org/10.1016/j.bpj.2026.01.008" target="_blank" style="display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--color-text)">
+        <div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);aspect-ratio:3/4"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/biophysical-fibrinogen.jpg" alt="Biophysical Journal cover" style="width:100%;height:100%;object-fit:cover"></div>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--color-neutral-500)">Biophysical Journal · 2026</div>
+        <div style="font-size:15px;font-weight:500;line-height:1.3">Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction</div>
+      </a>
+    </div>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:64px 0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:center">
+    <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/garzalabphotowithhouk_orig.jpeg" alt="Garza Lab with Dr. Kendall Houk" style="width:100%;aspect-ratio:4/3;object-fit:cover"></div>
+    <div style="max-width:520px">
+      <h2 style="font-size:28px;font-weight:500;line-height:1.15;letter-spacing:-.015em;margin:0 0 18px">The story of the Garzanians</h2>
+      <p style="margin:0;color:var(--color-neutral-300);text-wrap:pretty">The “Garzanian” name was born from Dr. Kendall Houk’s visit to Pomona College as the 2026 Robbins Lecturer. Houk, a founding father in the field of computational organic chemistry, recognized that Dr. Garza was doing more than just teaching; he was building a unique, high-energy culture of scientific excellence. During one of these visits, Houk reportedly dubbed the research group the "Garzanians." The name stuck immediately, serving as a way to distinguish the contributions made towards computational chemistry from Dr. Garza’s lab.</p>
+    </div>
+  </section>
+
+</div>
+</sc-if>
+
+<!-- ═══ RESEARCH ═══ -->
+<sc-if value="{{ isResearch }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Research" style="max-width:1200px;margin:0 auto;padding:0 32px">
+  <section style="padding:80px 0 56px;max-width:760px">
+    <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0 0 24px">Research</h1>
+    <p style="font-size:20px;line-height:1.5;color:var(--color-neutral-300);margin:0 0 20px;text-wrap:pretty">The Garza Lab pursues a fundamental question at the intersection of computational biophysics and structure-based drug design: how are proteins regulated dynamically by ligand binding, post-translational modifications, and their molecular environment, and how can this knowledge be harnessed to develop better therapeutics?</p>
+    <p style="font-size:20px;line-height:1.5;color:var(--color-neutral-300);margin:0 0 20px;text-wrap:pretty">We utilize advanced molecular modeling and physics-based simulations to visualize protein motions at atomic resolution that are invisible to traditional experimental methods.</p>
+    <p style="font-size:20px;line-height:1.5;color:var(--color-neutral-300);margin:0;text-wrap:pretty">By combining the rigorous "Garzanian" approach to physical chemistry with state-of-the-art computational tools, we seek to accelerate the development of life-saving treatments for diseases on all fronts. We welcome collaborations with researchers interested in macromolecule conformational dynamics and computer-aided drug design.</p>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:56px 0">
+    <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 40px">Computational Biophysics</h2>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-bottom:56px">
+      <div>
+        <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Intrinsically Disordered Proteins</h3>
+        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Intrinsically disordered proteins lack a single fixed structure, instead sampling an ensemble of conformations, and that flexibility is what lets them act as hubs in signaling, transcription and regulation. Because they present no stable binding pocket, they remain largely undruggable by conventional structure-based methods. We use molecular dynamics (MD) simulations and enhanced sampling techniques including replica-exchange and metadynamics to sample conformations inaccessible to experiment. Recent work in our group has characterized a previously unidentified intrinsically disordered region of the HPV-16E6 oncoprotein.</p>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
+        <p style="font-size:14px;margin:0;color:#000">Liam Kwak, Roberto A Garza-López, "Conformational Dynamics and Disorder of HPV-16 E6", Preprint: ChemRxiv, <a href="https://doi.org/10.26434/chemrxiv-2025-hvzp" target="_blank">10.26434/chemrxiv-2025-hvzp</a>.</p>
+      </div>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Figure 5.jpg" alt="Free energy surface of HPV-16 E6 with representative conformations" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Free energy surface of apo-16E6 conformations sampled by WT-MetaD simulations.</figcaption></figure>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start">
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Fig1a.jpg" alt="LRP1 binding to fibrinogen" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">LRP1 binding to fibrinogen.</figcaption></figure>
+      <div>
+        <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Protein-Protein Interactions</h3>
+        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Protein-protein interactions organize nearly every cellular process, and the interfaces they form are often large, shallow and transient rather than pocket-like, which makes both their mechanism and their inhibition difficult to resolve experimentally. Identifying the specific residue contacts that hold an interface together is a prerequisite for disrupting or stabilizing it with a drug. We use physics-based molecular docking together with MD simulations to obtain time-series interaction data at atomic resolution, working with experimental collaborators to give mechanistic insight into binding. Recent work in our group has resolved the multivalent binding mechanism of the LRP1-fibrinogen interaction alongside QCM-D measurements.</p>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
+        <p style="font-size:14px;margin:0;color:#000">Liam Kwak, Kevin Ye, Ananya Vinay, Gabby Lewis, Alyssa Yao, Daniel L Gao, Roberto A Garza-López, Malkiat S Johal, "Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction Revealed by QCM-D and Molecular Dynamics", <em>Biophys. J.</em> <strong>125</strong>, 1059-1069, <a href="https://doi.org/10.1016/j.bpj.2026.01.008" target="_blank">10.1016/j.bpj.2026.01.008</a>.</p>
+      </div>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
+      <div>
+        <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Enzyme Catalysis</h3>
+        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Enzymes accelerate reactions by many orders of magnitude, and that catalytic power rests on precise arrangements of active-site residues, cofactors and metal centers that reorganize as substrate binds. Resolving how those contacts form, and how a small molecule can compete with them, is the basis for designing selective inhibitors. We combine induced-fit docking which allows the active site to relax around a candidate ligand, with QM/MM simulations to characterize binding modes and their energetics. Recent work in our group has resolved a Cu(II) dependent binding mechanism of flavonoids to human tyrosinase using induced-fit docking and QCM-D.</p>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
+        <p style="font-size:14px;margin:0;color:var(--color-neutral-500)">Reference to come.</p>
+      </div>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/flavonoid-binding_orig.png" alt="Flavonoid binding" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Flavonoid binding pose from physics-based docking.</figcaption></figure>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
+      <div>
+        <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Protein Allostery</h3>
+        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Allosteric sites sit away from a protein’s primary binding pocket, yet ligands that occupy them can tune activity rather than switch it off, and because these sites are less conserved they offer selectivity that orthosteric drugs rarely achieve. The effect is kinetic as much as structural: a modulator can reshape how long an orthosteric ligand stays bound. We use unbinding kinetics simulations, which drive ligand release under an applied bias to recover residence times far longer than conventional MD can reach, together with pathway analysis to identify the residues that gate exit. Recent work in our group uncovered the molecular basis of mu-opioid receptor (MOR) allosteric modulators using unbinding kinetics simulations.</p>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
+        <p style="font-size:14px;margin:0;color:var(--color-neutral-500)">Reference to come.</p>
+      </div>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Figure 12.jpg" alt="Naloxone unbinding kinetics from the mu-opioid receptor with and without a negative allosteric modulator" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Naloxone residence time at the mu-opioid receptor, alone and with a negative allosteric modulator, with the sampled unbinding pathways.</figcaption></figure>
+    </div>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:56px 0">
+    <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 40px">Computer-aided drug design</h2>
+
+    <div style="max-width:760px;margin-bottom:56px">
+      <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">High-throughput small molecule screening</h3>
+      <p style="color:var(--color-neutral-300);margin:0;text-wrap:pretty"><em>In-silico</em> prediction of drug potency has emerged as a cost-efficient yet effective method during the early stages of drug design. We use computer-aided drug design (CADD) techniques such as physics-based high-throughput virtual screening (HTVS) to filter large databases of molecules for lead compounds and scaffolds. We use MD simulations and free energy calculations of lead compounds to inform future stages of drug development. Furthermore, we employ quantitative structure-activity relationship (QSAR) models to more efficiently process large datasets.</p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start">
+      <div>
+        <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Organometallic inhibitors</h3>
+        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Small-molecule organometallic compounds can serve as potent inhibitors. We assess the viability of organometallic compounds synthesized by collaborators as potential therapeutics. In earlier work, we have shown the viability of copper (II)-chelated small molecules in inhibiting the SARS-CoV-2 main protease.</p>
+        <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
+        <p style="font-size:14px;margin:0;color:#000">Roberto A Garza-López, Liam Kwak, Andrew Chung, Gabriel L Ancajas, John J Kozak, Harry B Gray, "Copper(II) Inhibition of the SARS-CoV-2 Main Protease," <em>Nat. Sci.</em> <strong>5</strong>, e70012 (2025), <a href="https://doi.org/10.1002/ntls.70012" target="_blank">10.1002/ntls.70012</a>.</p>
+      </div>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/editor/cu-schiff.png" alt="Copper(II) Schiff base complex" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Copper(II)-chelated Schiff base inhibitor.</figcaption></figure>
+    </div>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:56px 0 96px">
+    <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 24px">Random walk diffusion models</h2>
+    <div style="max-width:760px">
+      <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Diffusion-controlled processes such as electron transfer and exciton trapping on lattice structures are near-Markovian in nature. Modeling these processes as random walks can provide analytic formulas for properties such as mean-first passage time. We have developed random walk models for multi-layered two-dimensional and fractal lattices and applied them to a multitude of physically relevant systems.</p>
+      <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected works</div>
+      <p style="font-size:14px;margin:0 0 10px;color:#000">Roberto A Garza-López, Lawrence Chen, John J Kozak, "Markovian Model for Photoinduced Charge Separation in Dendritic Molecules," <em>Chem. Phys. Lett.: X</em> <strong>737</strong>, 100009 (2019), <a href="https://doi.org/10.1016/j.cpletx.2019.100009" target="_blank">10.1016/j.cpletx.2019.100009</a>.</p>
+      <p style="font-size:14px;margin:0;color:#000">John J Kozak, Roberto A Garza-López, Enrique Abad, "Lattice Statistical Theory of Random Walks on a Fractal-Like Geometry," <em>Phys. Rev. E</em> <strong>89</strong> (2016), <a href="https://doi.org/10.1103/PhysRevE.89.032147" target="_blank">10.1103/PhysRevE.89.032147</a>.</p>
+    </div>
+  </section>
+</div>
+</sc-if>
+
+<!-- ═══ TEAM ═══ -->
+<sc-if value="{{ isTeam }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Team" style="max-width:1200px;margin:0 auto;padding:0 32px">
+  <section style="padding:88px 0 48px">
+    <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0 0 20px">Team</h1>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:56px 0 64px">
+    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 36px">Principal Investigator</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px 48px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/garzapic.jpg" alt="Dr. Roberto A. Garza-López" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(24px,2.4vw,32px);font-weight:500;line-height:1.12;letter-spacing:-.02em;margin:0 0 8px">Dr. Roberto A. Garza-López</h3>
+        <div style="font-size:17px;color:var(--color-neutral-500);margin-bottom:20px">Professor of Chemistry, Pomona College</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:24px">
+          <a href="mailto:rgarza@pomona.edu">rgarza@pomona.edu</a>
+          <a href="https://www.researchgate.net/scientific-contributions/Roberto-A-Garza-Lopez-14360169" target="_blank">ResearchGate</a>
+        </div>
+        <div style="display:flex;flex-direction:column;gap:14px;color:var(--color-neutral-300);margin-bottom:24px;text-wrap:pretty">
+          <p style="margin:0">Roberto earned his B.S. in chemical engineering at Texas A&amp;M University, an M.S. in chemistry at the University of Texas at El Paso, and his Ph.D. in chemistry at the University of Georgia in 1991, where he stayed on as a postdoctoral associate.</p>
+          <p style="margin:0">He joined Pomona College in 1992 and is now a full professor of theoretical and computational physical chemistry, with more than thirty peer-reviewed articles in statistical thermodynamics, stochastic processes, molecular mechanics, and random walks and diffusion-controlled reactions on fractal and Euclidean surfaces. He was the first Cambridge-Pomona exchange professor, and held sabbaticals in the laboratories of Richard Zare at Stanford and Nobel laureate Ahmed Zewail at Caltech — whose autobiography he translated into Spanish as <em>Viaje a Través del Tiempo: senderos hacia el Premio Nobel</em>.</p>
+          <p style="margin:0">His current work, in long-standing collaboration with Harry Gray and John J. Kozak, spans protein folding and visualization, energy transfer in dendrimers, and computational drug design. He has taught in the Pomona Academy for Youth Success (PAYS) program since its inception, bringing high-school students into research with open-source computational tools.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:56px 0 64px">
+    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 36px">Postbaccalaureate Researcher</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/1736924018937.jpg" alt="Liam Kwak" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(1.15);transform-origin:50% 12%"></div>
+      <div style="max-width:520px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Liam Kwak</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Postbaccalaureate Fellow</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:mkgu2022@pomona.edu">mkgu2022@pomona.edu</a>
+          <a href="https://orcid.org/0009-0009-4949-9686" target="_blank">ORCID</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-300);text-wrap:pretty">Liam obtained a B.S. in Chemistry from Pomona College in 2026. During his time at Pomona College he joined the group of Dr. Roberto Garza to study membrane protein conformational dynamics. In his lab, he completed a senior thesis with distinction on uncovering the molecular basis of mu-opioid receptor (MOR) allosteric modulation. Upon completing his undergraduate studies in 2026, he returned to the Garza Lab as a postbaccalaureate fellow. Currently, he is investigating intrinsically disordered proteins (IDPs) at the atomic level using molecular dynamics (MD) simulations in connection to experimental NMR methods to gain insight into small molecule binding to IDPs for the development of novel IDP small molecule therapeutics.</p>
+      </div>
+    </div>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:56px 0 64px">
+    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 36px">Undergraduate Researchers</h2>
+    <div style="display:flex;flex-direction:column;gap:48px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/iantam_orig.jpeg" alt="Ian Tam" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Ian Tam</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '27</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:iwtp2023@mymail.pomona.edu">iwtp2023@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/andrewchung_orig.jpeg" alt="Andrew Chung" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Andrew Chung</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '28</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:acck2024@mymail.pomona.edu">acck2024@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);aspect-ratio:4/5;background:var(--color-surface);box-shadow:var(--shadow-sm);max-width:320px;display:grid;place-items:center;font-size:44px;font-weight:500;color:var(--color-accent-700)">JC</div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Jonathan Cong</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '28</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:jcid2024@mymail.pomona.edu">jcid2024@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Brasen.jpg" alt="Bra&#39;sen Phillips-Bates" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Bra'sen Phillips-Bates</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '28</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:bcpd2024@mymail.pomona.edu">bcpd2024@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/noahbaoerjin_orig.jpeg" alt="Noah Baoerjin" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Noah Baoerjin</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:nsbj2025@mymail.pomona.edu">nsbj2025@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Yonten.jpg" alt="Yonten Gyatso" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Yonten Gyatso</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:ygap2025@mymail.pomona.edu">ygap2025@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Ben.jpg" alt="Benjamin Roh" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Benjamin Roh</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:brwh2025@mymail.pomona.edu">brwh2025@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/justintopol_orig.jpeg" alt="Justin Topol" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Justin Topol</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:jste2025@mymail.pomona.edu">jste2025@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/nathanxu.jpeg" alt="Nathan Xu" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Nathan Xu</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:nxin2025@mymail.pomona.edu">nxin2025@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
+      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/andrewzheng_orig.jpeg" alt="Andrew Zheng" style="width:100%;height:100%;object-fit:cover"></div>
+      <div style="max-width:560px">
+        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Andrew Zheng</h3>
+        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+          <a href="mailto:ahzn2025@mymail.pomona.edu">ahzn2025@mymail.pomona.edu</a>
+        </div>
+        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+      </div>
+    </div>
+    </div>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+
+  <section style="padding:56px 0 64px">
+    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 32px">PAYS Alumni</h2>
+    <figure style="margin:0;max-width:900px"><div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/garzapays_orig.jpeg" alt="PAYS alumni with Dr. Garza-López" style="width:100%;aspect-ratio:16/9;object-fit:cover"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:12px">Left to right: Vivian Phan '24, Berlyn Sanchez '24, Roberto Garza-Lopez, Ashley Vicente '24, Aracely Saldivar '24</figcaption></figure>
+  </section>
+
+  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
+  <section style="padding:56px 0 96px">
+    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 28px">Alumni</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px 28px">
+      <sc-for list="{{ alumni }}" as="al" hint-placeholder-count="15">
+        <a href="{{ al.url }}" target="_blank" style="font-size:15px;padding:8px 0;color:var(--color-text);text-decoration:none;background:linear-gradient(to right,transparent,color-mix(in srgb, var(--color-text) 8%, transparent) 24px,color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 24px),transparent) no-repeat bottom / 100% 1px" style-hover="text-decoration:underline">{{ al.name }}</a>
+      </sc-for>
+    </div>
+  </section>
+  <div style="height:48px"></div>
+</div>
+</sc-if>
+
+<!-- ═══ PUBLICATIONS ═══ -->
+<sc-if value="{{ isPubs }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Publications" style="max-width:1200px;margin:0 auto;padding:0 32px">
+  <section style="padding:80px 0 40px;max-width:760px">
+    <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0 0 20px">Publications</h1>
+    <p style="margin:0;color:var(--color-neutral-500);font-size:14px">Full list on <a href="https://www.researchgate.net/scientific-contributions/Roberto-A-Garza-Lopez-14360169" target="_blank">ResearchGate</a>.</p>
+  </section>
+  <section style="padding-bottom:96px">
+    <sc-for list="{{ pubYears }}" as="y" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px 40px;padding:32px 0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent) no-repeat top / 100% 1px">
+        <div style="font-size:28px;font-weight:500;letter-spacing:-.015em;color:var(--color-accent);line-height:1">{{ y.year }}</div>
+        <div style="display:flex;flex-direction:column;gap:22px">
+          <sc-for list="{{ y.items }}" as="p" hint-placeholder-count="2">
+            <div>
+              <div style="font-size:17px;font-weight:500;line-height:1.35;margin-bottom:4px">{{ p.title }}</div>
+              <div style="font-size:14px;color:var(--color-neutral-400);margin-bottom:6px">{{ p.authors }}</div>
+              <div style="font-size:13px;color:var(--color-neutral-500);display:flex;gap:12px;flex-wrap:wrap"><span><em>{{ p.journal }}</em> {{ p.ref }}</span><a href="{{ p.url }}" target="_blank">{{ p.doi }}</a></div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+</div>
+</sc-if>
+
+<!-- ═══ NEWS ═══ -->
+<sc-if value="{{ isNews }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="News" style="max-width:1200px;margin:0 auto;padding:0 32px">
+  <section style="padding:80px 0 40px">
+    <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0">Lab News</h1>
+  </section>
+  <section style="padding-bottom:96px;max-width:860px">
+    <sc-for list="{{ news }}" as="n" hint-placeholder-count="4">
+      <div style="display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:24px;padding:24px 0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent) no-repeat top / 100% 1px">
+        <div style="font-size:13px;color:var(--color-neutral-500);padding-top:3px">{{ n.date }}</div>
+        <div>
+          <div style="font-size:18px;font-weight:500;line-height:1.3;margin-bottom:6px">{{ n.title }}</div>
+          <p style="margin:0;color:var(--color-neutral-400);font-size:14.5px;text-wrap:pretty">{{ n.text }}</p>
+        </div>
+      </div>
+    </sc-for>
+  </section>
+</div>
+</sc-if>
+
+<!-- ═══ CONTACT ═══ -->
+<sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+<div data-screen-label="Contact" style="max-width:1200px;margin:0 auto;padding:0 32px">
+  <section style="padding:120px 0 140px;max-width:760px">
+    <h1 style="font-size:clamp(40px,6vw,80px);font-weight:500;line-height:1;letter-spacing:-.03em;margin:0 0 40px">Join Us</h1>
+    <p style="font-size:clamp(18px,2vw,24px);line-height:1.45;color:var(--color-text);margin:0 0 24px;text-wrap:pretty">We welcome talented undergraduate students from Pomona College.</p>
+    <p style="font-size:clamp(18px,2vw,24px);line-height:1.45;color:var(--color-text);margin:0;text-wrap:pretty">Students interested in rotating in the lab or learning more about our research projects are encouraged to contact <a href="mailto:rgarza@pomona.edu">Dr. Roberto Garza</a>.</p>
+  </section>
+</div>
+</sc-if>
+
+</main>
+
+<footer style="background:#000;color:#fbfbfe;margin-top:64px">
+  <div style="max-width:1200px;margin:0 auto;padding:96px 32px;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:40px 48px;align-items:start">
+    <div></div>
+    <div>
+      <div style="font-size:clamp(26px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin-bottom:28px">Contact Us</div>
+      <div style="display:flex;flex-direction:column;gap:18px;font-size:16px">
+        <a href="mailto:rgarza@pomona.edu" style="color:#fbfbfe;text-decoration:none" style-hover="text-decoration:underline">rgarza@pomona.edu</a>
+        <a href="https://www.researchgate.net/scientific-contributions/Roberto-A-Garza-Lopez-14360169" target="_blank" style="color:#fbfbfe;text-decoration:none" style-hover="text-decoration:underline">ResearchGate</a>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:clamp(26px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin-bottom:28px">About Us</div>
+      <div style="display:flex;flex-direction:column;gap:18px;font-size:16px">
+        <div>Department of Chemistry</div>
+        <div>Pomona College</div>
+        <div>Claremont, CA 91711</div>
+      </div>
+    </div>
+  </div>
+</footer>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;animationSpeed&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fast&quot;,&quot;medium&quot;,&quot;slow&quot;],&quot;default&quot;:&quot;medium&quot;,&quot;tsType&quot;:&quot;'fast' | 'medium' | 'slow'&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
+const PAGES = ['home','research','team','publications','news','contact'];
+const U = 'https://garzalab.weebly.com/uploads/1/5/5/1/155162279/';
+const PUBS = [
+  {year:2026,title:'Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction Revealed by QCM-D and Molecular Dynamics',authors:'Liam Kwak, Kevin Ye, Ananya Vinay, Gabby Lewis, Alyssa Yao, Daniel L Gao, Roberto A Garza-López, Malkiat S Johal',journal:'Biophys. J.',ref:'125, 1059-1069',doi:'10.1016/j.bpj.2026.01.008',url:'https://doi.org/10.1016/j.bpj.2026.01.008'},
+  {year:2025,title:'Copper(II) Inhibition of the SARS-CoV-2 Main Protease',authors:'Roberto A Garza-López, Liam Kwak, Andrew Chung, Gabriel L Ancajas, John J Kozak, Harry B Gray',journal:'Nat. Sci.',ref:'5, e70012',doi:'10.1002/ntls.70012',url:'https://doi.org/10.1002/ntls.70012'},
+  {year:2019,title:'Markovian Model for Photoinduced Charge Separation in Dendritic Molecules',authors:'Roberto A Garza-López, Lawrence Chen, John J Kozak',journal:'Chem. Phys. Lett.: X',ref:'737, 100009',doi:'10.1016/j.cpletx.2019.100009',url:'https://doi.org/10.1016/j.cpletx.2019.100009'},
+  {year:2016,title:'Lattice Statistical Theory of Random Walks on a Fractal-Like Geometry',authors:'John J Kozak, Roberto A Garza-López, Enrique Abad',journal:'Phys. Rev. E',ref:'89, 032147',doi:'10.1103/PhysRevE.89.032147',url:'https://doi.org/10.1103/PhysRevE.89.032147'},
+];
+const NEWS = [
+  {sort:'2026-02',date:'February 2026',title:'Kendall Houk visits as Robbins Lecturer',text:'Dr. Kendall Houk, a founding father of computational organic chemistry, visited Pomona College as the 2026 Robbins Lecturer and dubbed the group the "Garzanians."'},
+  {sort:'2026-01',date:'January 2026',title:'Front cover of Biophysical Journal',text:'"Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction Revealed by QCM-D and Molecular Dynamics" is featured on the cover of Biophysical Journal, vol. 125.'},
+  {sort:'2025-05',date:'May 2025',title:'Front cover of Natural Sciences',text:'"Copper(II) Inhibition of the SARS-CoV-2 Main Protease," with Harry B. Gray and John J. Kozak, appears on the cover of Natural Sciences.'},
+  {sort:'2025-10',date:'October 2025',title:'HPV-16 E6 preprint on ChemRxiv',text:'Liam Kwak and Dr. Garza-López post "Conformational Dynamics and Disorder of HPV-16 E6," characterizing open and closed conformations of the apo oncoprotein.'},
+];
+const MEMBERS = [
+  ['Ian Tam',27],['Andrew Chung',28],['Jonathan Cong',28],["Bra'sen Phillips-Bates",28],['Noah Baoerjin',29],['Yonten Gyatso',29],['Benjamin Roh',29],
+];
+const ALUMNI = [
+  ['Theo Brown','https://www.linkedin.com/in/000theobrown/'],['Dr. Joseph Chang','https://www.linkedin.com/in/joseph-chang-74691419/'],['Dr. Raul Sun Hun Chang','https://www.linkedin.com/in/raul-sun-han-chang-phd-11367a96/'],['Lawrence Chen','https://www.linkedin.com/in/lawrence-chen-422304138/'],['Young Su Ko','https://www.linkedin.com/in/young-su-ko/'],['Dr. Sabari Kumar','https://bioenergy-kimlab.org/sabari-kumar-joined-as-a-new-phd-graduate-student/'],['Dr. Christopher Lee','https://imagingpartners.com/about-us/our-doctors/christopher-lee/'],['Kaitlyn Lee',null],['Dr. David Niu','https://healthy.kaiserpermanente.org/southern-california/physicians/david-niu-1688462'],['Matthew Paik','https://www.linkedin.com/in/mattpaik/'],['Dr. Arthur Partikian','https://uscpediatrics.com/neurology'],['Dr. David Siew','https://www.evergreenhealth.com/find-a-doctor/profile/david-siew-hospitalist/'],['Dr. Joseph Tseng','https://healthy.kaiserpermanente.org/southern-california/physicians/joseph-tseng-4048484'],['Dr. Sagar Vasandani','https://www.researchgate.net/profile/Sagar-Vasandani'],['Dr. Johnny Wang',null],
+];
+class Component extends DCLogic {
+  state = { page: PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home' };
+  componentDidMount() {
+    this._onHash = () => { const h = location.hash.slice(1); if (PAGES.includes(h)) this.setState({ page: h }); };
+    window.addEventListener('hashchange', this._onHash);
+    this._bindAnim();
+  }
+  componentWillUnmount() { window.removeEventListener('hashchange', this._onHash); if (this._io) this._io.disconnect(); }
+  componentDidUpdate() { this._bindAnim(); }
+  // Squarespace-style site animation: each block fades in once as it scrolls into view,
+  // siblings arriving together stagger slightly.
+  _bindAnim() {
+    const main = this._main && this._main.current;
+    if (!main || !document.documentElement.classList.contains('site-anim')) return;
+    const speed = this.props.animationSpeed ?? 'medium';
+    const dur = { fast: .5, medium: .9, slow: 1.4 }[speed] || .9;
+    if (!this._io) {
+      this._io = new IntersectionObserver((entries) => {
+        let i = 0;
+        entries.forEach((en) => {
+          if (!en.isIntersecting) return;
+          const el = en.target;
+          el.style.setProperty('--anim-delay', (i++ * 0.12) + 's');
+          el.style.setProperty('--anim-dur', dur + 's');
+          el.dataset.anim = 'in';
+          this._io.unobserve(el);
+        });
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+    }
+    const isBox = (el) => /grid|flex/.test(getComputedStyle(el).display) && el.children.length > 1;
+    const blocks = [];
+    main.querySelectorAll('section > *').forEach((el) => {
+      if (isBox(el)) Array.from(el.children).forEach((c) => blocks.push(c)); else blocks.push(el);
+    });
+    blocks.forEach((el) => {
+      if (el.dataset.anim) return;
+      el.dataset.anim = 'pre';
+      this._io.observe(el);
+    });
+  }
+  nav(p) { return (e) => { e.preventDefault(); if (location.hash !== '#' + p) history.pushState(null, '', '#' + p); this.setState({ page: p }); window.scrollTo(0, 0); }; }
+  renderVals() {
+    const page = this.state.page;
+    const variant = (this.props.homeVariant ?? 'A').toUpperCase();
+    this._main = this._main || React.createRef();
+    const go = {}, navColor = {};
+    PAGES.forEach(p => { go[p] = this.nav(p); navColor[p] = '#000'; });
+    const covers = [
+      {imgSafe:U+'published/nat-sci-covid.jpg',url:'https://doi.org/10.1002/ntls.70012',journal:'Natural Sciences',year:'2025',title:'Copper(II) Inhibition of the SARS-CoV-2 Main Protease'},
+      {imgSafe:U+'published/biophysical-fibrinogen.jpg',url:'https://doi.org/10.1016/j.bpj.2026.01.008',journal:'Biophysical Journal',year:'2026',title:'Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction'},
+    ];
+    const areas = [
+      {kicker:'01',title:'Protein biomechanics',blurb:'Molecular dynamics of conformationally ambiguous regions, disordered proteins, and the binding interactions that govern PLIs and PPIs.'},
+      {kicker:'02',title:'Computer-aided drug design',blurb:'Physics-based high-throughput virtual screening, free energy calculations, QSAR, and organometallic inhibitors.'},
+      {kicker:'03',title:'Random walk diffusion models',blurb:'Analytic lattice models of diffusion-controlled processes such as electron transfer and exciton trapping.'},
+    ];
+    const members = MEMBERS.map(([name, year, img]) => ({ name, year: "'" + year, img, imgSafe: img || '', hasImg: !!img, noImg: !img, initials: name.split(/[\s-]+/).filter(Boolean).map(w => w[0]).slice(0, 2).join('') }));
+    const alumni = ALUMNI.map(([name, url]) => ({ name, url: url || '#team' }));
+    const newsSorted = [...NEWS].sort((a, b) => (b.sort || '').localeCompare(a.sort || ''));
+    const years = [...new Set(PUBS.map(p => p.year))].sort((a, b) => b - a);
+    const pubYears = years.map(y => ({ year: y, items: PUBS.filter(p => p.year === y) }));
+    return {
+      go, navColor, covers, areas, members, alumni, pubYears, news: newsSorted, newsTeaser: newsSorted.slice(0, 3), mainRef: this._main,
+      isHomeA: page === 'home' && variant === 'A', isHomeB: page === 'home' && variant === 'B',
+      isResearch: page === 'research', isTeam: page === 'team', isPubs: page === 'publications', isNews: page === 'news', isContact: page === 'contact',
+    };
+  }
+}
+</script>
+</body>
+</html>
