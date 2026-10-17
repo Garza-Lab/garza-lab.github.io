@@ -37,6 +37,22 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 /* Site animation: blocks fade in individually as they enter the viewport (no load splash). */
 .site-anim main [data-anim="pre"]{opacity:0}
 .site-anim main [data-anim="in"]{opacity:1;transition:opacity var(--anim-dur,.9s) ease var(--anim-delay,0s)}
+/* Home hero: E6 trajectory loop (transparent video) straddling the black band.
+   --md-overlap is the share of the video that sits over the band; E6 fills 15-78%
+   of the frame's height, so .48 puts the band edge through the protein's lower part. */
+:root{--md-size:min(560px,44vw);--md-overlap:.48}
+.md-hero{margin-inline:calc(50% - 50vw);display:grid;grid-template-columns:minmax(0,1fr) var(--md-size);gap:40px 56px;align-items:center;padding:32px max(32px, calc(50vw - 568px)) 0}
+.md-hero-text{padding:40px 0}
+.md-hero-media{position:relative;z-index:1;align-self:end;margin-bottom:calc(var(--md-size) * var(--md-overlap) * -1)}
+.md-hero-media video{display:block;width:100%;aspect-ratio:1/1;object-fit:contain}
+.md-band-text{max-width:min(900px,60%)}
+@media (max-width:760px){
+  :root{--md-size:min(85vw,calc(100vw - 64px));--md-overlap:.4}
+  .md-hero{grid-template-columns:1fr;gap:8px}
+  .md-hero-text{padding:24px 0 0}
+  .md-hero-media{justify-self:center;width:var(--md-size)}
+  .md-band-text{max-width:none}
+}
 </style>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
 </helmet>
@@ -57,11 +73,8 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 <!-- ═══ HOME · A ═══ -->
 <sc-if value="{{ isHomeA }}" hint-placeholder-val="{{ true }}">
 <div data-screen-label="Home A" style="max-width:1200px;margin:0 auto;padding:0 32px">
-  <section style="margin-inline:calc(50% - 50vw);display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:40px 56px;align-items:center;padding:32px 32px 40px">
-    <figure style="margin:0">
-      <img src="uploads/opt/Cover Art.jpg" alt="Molecular dynamics of the LRP1–fibrinogen interaction" style="width:100%;height:auto;max-height:90vh;object-fit:contain;object-position:left center">
-    </figure>
-    <div style="padding:40px max(32px, calc(50vw - 568px)) 40px 0">
+  <section class="md-hero">
+    <div class="md-hero-text">
       <h1 style="font-size:clamp(48px,7vw,104px);font-weight:500;line-height:.94;letter-spacing:-.018em;font-kerning:normal;font-feature-settings:'kern' 1;margin:0 0 24px">Garza Lab</h1>
       <div style="font-size:clamp(16px,1.5vw,20px);line-height:1.5;color:var(--color-neutral-300)">
         <div style="color:var(--color-text);font-size:clamp(22px,3vw,40px);font-weight:500;line-height:1.05;letter-spacing:-.025em;margin-bottom:10px">Pomona College</div>
@@ -69,10 +82,13 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
         <div>Claremont, California</div>
       </div>
     </div>
+    <div class="md-hero-media">
+      <video data-md-hero role="img" poster="uploads/hero/e6-hero-poster.webp" aria-label="Molecular dynamics simulation of the HPV-16 E6 oncoprotein"></video>
+    </div>
   </section>
 
   <section style="margin-inline:calc(50% - 50vw);padding:80px max(32px, calc(50vw - 568px));background:#000;color:#fbfbfe">
-    <div style="max-width:900px">
+    <div class="md-band-text">
       <h2 style="font-size:clamp(40px,6vw,76px);font-weight:500;line-height:1.02;letter-spacing:-.03em;margin:0 0 28px">Computational Biophysics</h2>
       <p style="font-size:clamp(20px,2.4vw,30px);line-height:1.4;margin:0;max-width:900px;text-wrap:pretty">Leveraging computational chemistry to study protein conformational dynamics and design novel therapeutics for complex biological targets.</p>
     </div>
@@ -495,9 +511,26 @@ class Component extends DCLogic {
     this._onHash = () => { const h = location.hash.slice(1); if (PAGES.includes(h)) this.setState({ page: h }); };
     window.addEventListener('hashchange', this._onHash);
     this._bindAnim();
+    this._bindHeroVideo();
   }
   componentWillUnmount() { window.removeEventListener('hashchange', this._onHash); if (this._io) this._io.disconnect(); }
-  componentDidUpdate() { this._bindAnim(); }
+  componentDidUpdate() { this._bindAnim(); this._bindHeroVideo(); }
+  // Home hero: E6 trajectory loop with a transparent background. WebKit (Safari and
+  // every iPhone/iPad browser) only shows video alpha in HEVC; everyone else gets the
+  // VP9 WebM. React drops the `muted` attribute, so playback flags are set here.
+  _bindHeroVideo() {
+    const main = this._main && this._main.current;
+    const v = main && main.querySelector('video[data-md-hero]');
+    if (!v || v.dataset.bound) return;
+    v.dataset.bound = '1';
+    v.muted = v.defaultMuted = true;
+    v.loop = true;
+    v.playsInline = true;
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    v.src = /^Apple/.test(navigator.vendor) ? 'uploads/hero/e6-hero.mov' : 'uploads/hero/e6-hero.webm';
+    const p = v.play();
+    if (p && p.catch) p.catch(() => {});
+  }
   // Squarespace-style site animation: each block fades in once as it scrolls into view,
   // siblings arriving together stagger slightly.
   _bindAnim() {
