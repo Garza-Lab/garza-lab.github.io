@@ -36,9 +36,11 @@ def parse_args():
     p.add_argument('--out', required=True, help='folder for frame_####.png')
     p.add_argument('--replica', type=int, default=2, help='1-based replica')
     p.add_argument('--frames', type=int, default=360, help='loop length, output frames')
-    p.add_argument('--stride', type=int, default=2, help='source frames per output frame')
-    p.add_argument('--sigma', type=float, default=3.0, help='smoothing, output frames')
-    p.add_argument('--blend', type=int, default=30, help='seam fade, output frames')
+    # 16 x 420 frames spans ~2/3 of replica 2: ~3x the motion of stride 2 at a
+    # similar per-frame speed (slow breathing instead of faster jitter)
+    p.add_argument('--stride', type=int, default=16, help='source frames per output frame')
+    p.add_argument('--sigma', type=float, default=5.0, help='smoothing, output frames')
+    p.add_argument('--blend', type=int, default=60, help='seam fade, output frames')
     p.add_argument('--start', type=int, help='force the window start (skip the search)')
     p.add_argument('--turn', type=float, nargs=2, default=[0.0, 0.0], metavar=('X', 'Y'),
                    help='extra camera rotation in degrees after orienting on the core')

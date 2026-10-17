@@ -38,16 +38,16 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 .site-anim main [data-anim="pre"]{opacity:0}
 .site-anim main [data-anim="in"]{opacity:1;transition:opacity var(--anim-dur,.9s) ease var(--anim-delay,0s)}
 /* Home hero: E6 trajectory loop (transparent video) straddling the black band.
-   --md-overlap is the share of the video that sits over the band; E6 fills 15-78%
-   of the frame's height, so .48 puts the band edge through the protein's lower part. */
-:root{--md-size:min(560px,44vw);--md-overlap:.48}
+   --md-overlap is the share of the video that sits over the band; E6 fills 22-83%
+   of the frame's height, so .44 puts the band edge through the protein's lower part. */
+:root{--md-size:min(560px,44vw);--md-overlap:.44}
 .md-hero{margin-inline:calc(50% - 50vw);display:grid;grid-template-columns:minmax(0,1fr) var(--md-size);gap:40px 56px;align-items:center;padding:32px max(32px, calc(50vw - 568px)) 0}
 .md-hero-text{padding:40px 0}
 .md-hero-media{position:relative;z-index:1;align-self:end;margin-bottom:calc(var(--md-size) * var(--md-overlap) * -1)}
 .md-hero-media video{display:block;width:100%;aspect-ratio:1/1;object-fit:contain}
 .md-band-text{max-width:min(900px,60%)}
 @media (max-width:760px){
-  :root{--md-size:min(85vw,calc(100vw - 64px));--md-overlap:.4}
+  :root{--md-size:min(85vw,calc(100vw - 64px));--md-overlap:.36}
   .md-hero{grid-template-columns:1fr;gap:8px}
   .md-hero-text{padding:24px 0 0}
   .md-hero-media{justify-self:center;width:var(--md-size)}
