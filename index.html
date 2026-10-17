@@ -55,6 +55,9 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
   .md-hero-text{padding:24px 0 0}
   .md-hero-media{justify-self:center;width:var(--md-size)}
   .md-band-text{max-width:none}
+  /* phones keep the original header sizes so the nav doesn't wrap to 4 rows */
+  nav a{font-size:17px !important}
+  nav a:first-child{font-size:19px !important}
 }
 </style>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
