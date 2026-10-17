@@ -48,8 +48,10 @@ clang -fobjc-arc -framework Foundation -framework AVFoundation \
 ```
 
 Outputs `e6-hero.webm` (Chrome, Firefox, Edge), `e6-hero.mov` (Safari, iOS)
-and `e6-hero-poster.webp`. Keep each video under ~3 MB: raise the 4th
-argument of `encode.sh` (VP9 CRF) or lower the 5th (HEVC bitrate, kbps).
+and `e6-hero-poster.webp`. The defaults keep each video under ~3 MB (WebM
+2.7 MB, .mov 2.7 MB for the current 1080 px loop). To shrink further, raise the 4th
+argument of `encode.sh` (VP9 CRF) or lower the 5th (HEVC color bitrate, kbps)
+or 6th (HEVC alpha quality, 0–1).
 
 ## Tests
 
