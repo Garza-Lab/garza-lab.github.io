@@ -16,7 +16,7 @@
 :root{
   --color-bg:#fbfbfe;
   --color-surface:#f3f5fe;
-  --color-text:#20222a;
+  --color-text:#000;
   --color-divider:color-mix(in srgb, #292b31 14%, transparent);
   --color-accent:#20222a;
   --color-neutral-300:#4b4f5c;
@@ -137,9 +137,9 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 <div data-screen-label="Research" style="max-width:1200px;margin:0 auto;padding:0 32px">
   <section style="padding:80px 0 56px;max-width:760px">
     <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0 0 24px">Research</h1>
-    <p style="font-size:20px;line-height:1.5;color:var(--color-neutral-300);margin:0 0 20px;text-wrap:pretty">The Garza Lab pursues a fundamental question at the intersection of computational biophysics and structure-based drug design: how are proteins regulated dynamically by ligand binding, post-translational modifications, and their molecular environment, and how can this knowledge be harnessed to develop better therapeutics?</p>
-    <p style="font-size:20px;line-height:1.5;color:var(--color-neutral-300);margin:0 0 20px;text-wrap:pretty">We utilize advanced molecular modeling and physics-based simulations to visualize protein motions at atomic resolution that are invisible to traditional experimental methods.</p>
-    <p style="font-size:20px;line-height:1.5;color:var(--color-neutral-300);margin:0;text-wrap:pretty">By combining the rigorous "Garzanian" approach to physical chemistry with state-of-the-art computational tools, we seek to accelerate the development of life-saving treatments for diseases on all fronts. We welcome collaborations with researchers interested in macromolecule conformational dynamics and computer-aided drug design.</p>
+    <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 20px;text-wrap:pretty">The Garza Lab pursues a fundamental question at the intersection of computational biophysics and structure-based drug design: how are proteins regulated dynamically by ligand binding, post-translational modifications, and their molecular environment, and how can this knowledge be harnessed to develop better therapeutics?</p>
+    <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 20px;text-wrap:pretty">We utilize advanced molecular modeling and physics-based simulations to visualize protein motions at atomic resolution that are invisible to traditional experimental methods.</p>
+    <p style="font-size:20px;line-height:1.5;color:#000;margin:0;text-wrap:pretty">By combining the rigorous "Garzanian" approach to physical chemistry with state-of-the-art computational tools, we seek to accelerate the development of life-saving treatments for diseases on all fronts. We welcome collaborations with researchers interested in macromolecule conformational dynamics and computer-aided drug design.</p>
   </section>
 
   <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
@@ -150,18 +150,18 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-bottom:56px">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Intrinsically Disordered Proteins</h3>
-        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Intrinsically disordered proteins lack a single fixed structure, instead sampling an ensemble of conformations, and that flexibility is what lets them act as hubs in signaling, transcription and regulation. Because they present no stable binding pocket, they remain largely undruggable by conventional structure-based methods. We use molecular dynamics (MD) simulations and enhanced sampling techniques including replica-exchange and metadynamics to sample conformations inaccessible to experiment. Recent work in our group has characterized a previously unidentified intrinsically disordered region of the HPV-16E6 oncoprotein.</p>
+        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Intrinsically disordered proteins lack a single fixed structure, instead sampling an ensemble of conformations, and that flexibility is what lets them act as hubs in signaling, transcription and regulation. Because they present no stable binding pocket, they remain largely undruggable by conventional structure-based methods. We use molecular dynamics (MD) simulations and enhanced sampling techniques including replica-exchange and metadynamics to sample conformations inaccessible to experiment. Recent work in our group has characterized a previously unidentified intrinsically disordered region of the HPV-16E6 oncoprotein.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Liam Kwak, Roberto A Garza-López, "Conformational Dynamics and Disorder of HPV-16 E6", Preprint: ChemRxiv, <a href="https://doi.org/10.26434/chemrxiv-2025-hvzp" target="_blank">10.26434/chemrxiv-2025-hvzp</a>.</p>
       </div>
-      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Figure 5.jpg" alt="Free energy surface of HPV-16 E6 with representative conformations" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Free energy surface of apo-16E6 conformations sampled by WT-MetaD simulations.</figcaption></figure>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Figure 5.jpg" alt="Free energy surface of HPV-16 E6 with representative conformations" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">Free energy surface of apo-16E6 conformations sampled by WT-MetaD simulations.</figcaption></figure>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start">
-      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Fig1a.jpg" alt="LRP1 binding to fibrinogen" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">LRP1 binding to fibrinogen.</figcaption></figure>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Fig1a.jpg" alt="LRP1 binding to fibrinogen" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">LRP1 binding to fibrinogen.</figcaption></figure>
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Protein-Protein Interactions</h3>
-        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Protein-protein interactions organize nearly every cellular process, and the interfaces they form are often large, shallow and transient rather than pocket-like, which makes both their mechanism and their inhibition difficult to resolve experimentally. Identifying the specific residue contacts that hold an interface together is a prerequisite for disrupting or stabilizing it with a drug. We use physics-based molecular docking together with MD simulations to obtain time-series interaction data at atomic resolution, working with experimental collaborators to give mechanistic insight into binding. Recent work in our group has resolved the multivalent binding mechanism of the LRP1-fibrinogen interaction alongside QCM-D measurements.</p>
+        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Protein-protein interactions organize nearly every cellular process, and the interfaces they form are often large, shallow and transient rather than pocket-like, which makes both their mechanism and their inhibition difficult to resolve experimentally. Identifying the specific residue contacts that hold an interface together is a prerequisite for disrupting or stabilizing it with a drug. We use physics-based molecular docking together with MD simulations to obtain time-series interaction data at atomic resolution, working with experimental collaborators to give mechanistic insight into binding. Recent work in our group has resolved the multivalent binding mechanism of the LRP1-fibrinogen interaction alongside QCM-D measurements.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Liam Kwak, Kevin Ye, Ananya Vinay, Gabby Lewis, Alyssa Yao, Daniel L Gao, Roberto A Garza-López, Malkiat S Johal, "Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction Revealed by QCM-D and Molecular Dynamics", <em>Biophys. J.</em> <strong>125</strong>, 1059-1069, <a href="https://doi.org/10.1016/j.bpj.2026.01.008" target="_blank">10.1016/j.bpj.2026.01.008</a>.</p>
       </div>
@@ -170,21 +170,21 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Enzyme Catalysis</h3>
-        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Enzymes accelerate reactions by many orders of magnitude, and that catalytic power rests on precise arrangements of active-site residues, cofactors and metal centers that reorganize as substrate binds. Resolving how those contacts form, and how a small molecule can compete with them, is the basis for designing selective inhibitors. We combine induced-fit docking which allows the active site to relax around a candidate ligand, with QM/MM simulations to characterize binding modes and their energetics. Recent work in our group has resolved a Cu(II) dependent binding mechanism of flavonoids to human tyrosinase using induced-fit docking and QCM-D.</p>
+        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Enzymes accelerate reactions by many orders of magnitude, and that catalytic power rests on precise arrangements of active-site residues, cofactors and metal centers that reorganize as substrate binds. Resolving how those contacts form, and how a small molecule can compete with them, is the basis for designing selective inhibitors. We combine induced-fit docking which allows the active site to relax around a candidate ligand, with QM/MM simulations to characterize binding modes and their energetics. Recent work in our group has resolved a Cu(II) dependent binding mechanism of flavonoids to human tyrosinase using induced-fit docking and QCM-D.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
-        <p style="font-size:14px;margin:0;color:var(--color-neutral-500)">Reference to come.</p>
+        <p style="font-size:14px;margin:0;color:#000">Reference to come.</p>
       </div>
-      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/flavonoid-binding_orig.png" alt="Flavonoid binding" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Flavonoid binding pose from physics-based docking.</figcaption></figure>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/flavonoid-binding_orig.png" alt="Flavonoid binding" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">Flavonoid binding pose from physics-based docking.</figcaption></figure>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Protein Allostery</h3>
-        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Allosteric sites sit away from a protein’s primary binding pocket, yet ligands that occupy them can tune activity rather than switch it off, and because these sites are less conserved they offer selectivity that orthosteric drugs rarely achieve. The effect is kinetic as much as structural: a modulator can reshape how long an orthosteric ligand stays bound. We use unbinding kinetics simulations, which drive ligand release under an applied bias to recover residence times far longer than conventional MD can reach, together with pathway analysis to identify the residues that gate exit. Recent work in our group uncovered the molecular basis of mu-opioid receptor (MOR) allosteric modulators using unbinding kinetics simulations.</p>
+        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Allosteric sites sit away from a protein’s primary binding pocket, yet ligands that occupy them can tune activity rather than switch it off, and because these sites are less conserved they offer selectivity that orthosteric drugs rarely achieve. The effect is kinetic as much as structural: a modulator can reshape how long an orthosteric ligand stays bound. We use unbinding kinetics simulations, which drive ligand release under an applied bias to recover residence times far longer than conventional MD can reach, together with pathway analysis to identify the residues that gate exit. Recent work in our group uncovered the molecular basis of mu-opioid receptor (MOR) allosteric modulators using unbinding kinetics simulations.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
-        <p style="font-size:14px;margin:0;color:var(--color-neutral-500)">Reference to come.</p>
+        <p style="font-size:14px;margin:0;color:#000">Reference to come.</p>
       </div>
-      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Figure 12.jpg" alt="Naloxone unbinding kinetics from the mu-opioid receptor with and without a negative allosteric modulator" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Naloxone residence time at the mu-opioid receptor, alone and with a negative allosteric modulator, with the sampled unbinding pathways.</figcaption></figure>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Figure 12.jpg" alt="Naloxone unbinding kinetics from the mu-opioid receptor with and without a negative allosteric modulator" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">Naloxone residence time at the mu-opioid receptor, alone and with a negative allosteric modulator, with the sampled unbinding pathways.</figcaption></figure>
     </div>
   </section>
 
@@ -195,17 +195,17 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 
     <div style="max-width:760px;margin-bottom:56px">
       <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">High-throughput small molecule screening</h3>
-      <p style="color:var(--color-neutral-300);margin:0;text-wrap:pretty"><em>In-silico</em> prediction of drug potency has emerged as a cost-efficient yet effective method during the early stages of drug design. We use computer-aided drug design (CADD) techniques such as physics-based high-throughput virtual screening (HTVS) to filter large databases of molecules for lead compounds and scaffolds. We use MD simulations and free energy calculations of lead compounds to inform future stages of drug development. Furthermore, we employ quantitative structure-activity relationship (QSAR) models to more efficiently process large datasets.</p>
+      <p style="color:#000;margin:0;text-wrap:pretty"><em>In-silico</em> prediction of drug potency has emerged as a cost-efficient yet effective method during the early stages of drug design. We use computer-aided drug design (CADD) techniques such as physics-based high-throughput virtual screening (HTVS) to filter large databases of molecules for lead compounds and scaffolds. We use MD simulations and free energy calculations of lead compounds to inform future stages of drug development. Furthermore, we employ quantitative structure-activity relationship (QSAR) models to more efficiently process large datasets.</p>
     </div>
 
     <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Organometallic inhibitors</h3>
-        <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Small-molecule organometallic compounds can serve as potent inhibitors. We assess the viability of organometallic compounds synthesized by collaborators as potential therapeutics. In earlier work, we have shown the viability of copper (II)-chelated small molecules in inhibiting the SARS-CoV-2 main protease.</p>
+        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Small-molecule organometallic compounds can serve as potent inhibitors. We assess the viability of organometallic compounds synthesized by collaborators as potential therapeutics. In earlier work, we have shown the viability of copper (II)-chelated small molecules in inhibiting the SARS-CoV-2 main protease.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Roberto A Garza-López, Liam Kwak, Andrew Chung, Gabriel L Ancajas, John J Kozak, Harry B Gray, "Copper(II) Inhibition of the SARS-CoV-2 Main Protease," <em>Nat. Sci.</em> <strong>5</strong>, e70012 (2025), <a href="https://doi.org/10.1002/ntls.70012" target="_blank">10.1002/ntls.70012</a>.</p>
       </div>
-      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/editor/cu-schiff.png" alt="Copper(II) Schiff base complex" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:8px">Copper(II)-chelated Schiff base inhibitor.</figcaption></figure>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/editor/cu-schiff.png" alt="Copper(II) Schiff base complex" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">Copper(II)-chelated Schiff base inhibitor.</figcaption></figure>
     </div>
   </section>
 
@@ -214,7 +214,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
   <section style="padding:56px 0 96px">
     <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 24px">Random walk diffusion models</h2>
     <div style="max-width:760px">
-      <p style="color:var(--color-neutral-300);margin:0 0 18px;text-wrap:pretty">Diffusion-controlled processes such as electron transfer and exciton trapping on lattice structures are near-Markovian in nature. Modeling these processes as random walks can provide analytic formulas for properties such as mean-first passage time. We have developed random walk models for multi-layered two-dimensional and fractal lattices and applied them to a multitude of physically relevant systems.</p>
+      <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Diffusion-controlled processes such as electron transfer and exciton trapping on lattice structures are near-Markovian in nature. Modeling these processes as random walks can provide analytic formulas for properties such as mean-first passage time. We have developed random walk models for multi-layered two-dimensional and fractal lattices and applied them to a multitude of physically relevant systems.</p>
       <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected works</div>
       <p style="font-size:14px;margin:0 0 10px;color:#000">Roberto A Garza-López, Lawrence Chen, John J Kozak, "Markovian Model for Photoinduced Charge Separation in Dendritic Molecules," <em>Chem. Phys. Lett.: X</em> <strong>737</strong>, 100009 (2019), <a href="https://doi.org/10.1016/j.cpletx.2019.100009" target="_blank">10.1016/j.cpletx.2019.100009</a>.</p>
       <p style="font-size:14px;margin:0;color:#000">John J Kozak, Roberto A Garza-López, Enrique Abad, "Lattice Statistical Theory of Random Walks on a Fractal-Like Geometry," <em>Phys. Rev. E</em> <strong>89</strong> (2016), <a href="https://doi.org/10.1103/PhysRevE.89.032147" target="_blank">10.1103/PhysRevE.89.032147</a>.</p>
@@ -238,12 +238,12 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/garzapic.jpg" alt="Dr. Roberto A. Garza-López" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(24px,2.4vw,32px);font-weight:500;line-height:1.12;letter-spacing:-.02em;margin:0 0 8px">Dr. Roberto A. Garza-López</h3>
-        <div style="font-size:17px;color:var(--color-neutral-500);margin-bottom:20px">Professor of Chemistry, Pomona College</div>
+        <div style="font-size:17px;color:#000;margin-bottom:20px">Professor of Chemistry, Pomona College</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:24px">
           <a href="mailto:rgarza@pomona.edu">rgarza@pomona.edu</a>
           <a href="https://www.researchgate.net/scientific-contributions/Roberto-A-Garza-Lopez-14360169" target="_blank">ResearchGate</a>
         </div>
-        <div style="display:flex;flex-direction:column;gap:14px;color:var(--color-neutral-300);margin-bottom:24px;text-wrap:pretty">
+        <div style="display:flex;flex-direction:column;gap:14px;color:#000;margin-bottom:24px;text-wrap:pretty">
           <p style="margin:0">Roberto earned his B.S. in chemical engineering at Texas A&amp;M University, an M.S. in chemistry at the University of Texas at El Paso, and his Ph.D. in chemistry at the University of Georgia in 1991, where he stayed on as a postdoctoral associate.</p>
           <p style="margin:0">He joined Pomona College in 1992 and is now a full professor of theoretical and computational physical chemistry, with more than thirty peer-reviewed articles in statistical thermodynamics, stochastic processes, molecular mechanics, and random walks and diffusion-controlled reactions on fractal and Euclidean surfaces. He was the first Cambridge-Pomona exchange professor, and held sabbaticals in the laboratories of Richard Zare at Stanford and Nobel laureate Ahmed Zewail at Caltech — whose autobiography he translated into Spanish as <em>Viaje a Través del Tiempo: senderos hacia el Premio Nobel</em>.</p>
           <p style="margin:0">His current work, in long-standing collaboration with Harry Gray and John J. Kozak, spans protein folding and visualization, energy transfer in dendrimers, and computational drug design. He has taught in the Pomona Academy for Youth Success (PAYS) program since its inception, bringing high-school students into research with open-source computational tools.</p>
@@ -260,12 +260,12 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/1736924018937.jpg" alt="Liam Kwak" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(1.15);transform-origin:50% 12%"></div>
       <div style="max-width:520px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Liam Kwak</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Postbaccalaureate Fellow, Class of '26</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Postbaccalaureate Fellow, Class of '26</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:mkgu2022@pomona.edu">mkgu2022@pomona.edu</a>
           <a href="https://orcid.org/0009-0009-4949-9686" target="_blank">ORCID</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-300);text-wrap:pretty">Liam obtained a B.S. in Chemistry from Pomona College in 2026. During his time at Pomona College he joined the group of Dr. Roberto Garza where he completed a senior thesis with distinction for studying mu-opioid receptor allosteric modulation. Upon completing his undergraduate studies in 2026, he returned to the Garza Lab as a postbaccalaureate fellow. Currently, he is investigating how small molecules bind to intrinsically disordered proteins using molecular dynamics simulations in connection to experimental NMR methods.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Liam obtained a B.S. in Chemistry from Pomona College in 2026. During his time at Pomona College he joined the group of Dr. Roberto Garza where he completed a senior thesis with distinction for studying mu-opioid receptor allosteric modulation. Upon completing his undergraduate studies in 2026, he returned to the Garza Lab as a postbaccalaureate fellow. Currently, he is investigating how small molecules bind to intrinsically disordered proteins using molecular dynamics simulations in connection to experimental NMR methods.</p>
       </div>
     </div>
   </section>
@@ -279,110 +279,110 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Ian.jpg" alt="Ian Tam" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Ian Tam</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '27</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '27</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:iwtp2023@mymail.pomona.edu">iwtp2023@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Ian is studying chemistry and applied math at Pomona College with a minor in music. In the lab of Dr. Roberto Garza, he has studied the binding mechanisms of flavonoid compounds to tyrosinase. He is currently investigating force fields for more accurate molecular dynamics (MD) simulations of intrinsically disordered proteins (IDPs). Ian is a clarinetist in the Pomona College Orchestra and plays in a clarinet-violin-piano trio.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Ian is studying chemistry and applied math at Pomona College with a minor in music. In the lab of Dr. Roberto Garza, he has studied the binding mechanisms of flavonoid compounds to tyrosinase. He is currently investigating force fields for more accurate molecular dynamics (MD) simulations of intrinsically disordered proteins (IDPs). Ian is a clarinetist in the Pomona College Orchestra and plays in a clarinet-violin-piano trio.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/andrewchung_orig.jpeg" alt="Andrew Chung" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Andrew Chung</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '28</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '28</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:acck2024@mymail.pomona.edu">acck2024@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Andrew is studying chemistry at Pomona College. In Dr. Roberto Garza&#39;s lab, his research uses molecular dynamics simulations to probe the mechanisms of ROR&gamma;t inverse agonists as potential modulators of Th17-driven autoimmunity. His work bridges computational biophysics with wet-lab immunology experience, and he is working toward a career as a physician-scientist in this space.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Andrew is studying chemistry at Pomona College. In Dr. Roberto Garza&#39;s lab, his research uses molecular dynamics simulations to probe the mechanisms of ROR&gamma;t inverse agonists as potential modulators of Th17-driven autoimmunity. His work bridges computational biophysics with wet-lab immunology experience, and he is working toward a career as a physician-scientist in this space.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Jonathan.jpeg" alt="Jonathan Cong" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Jonathan Cong</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '28</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '28</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:jcid2024@mymail.pomona.edu">jcid2024@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Jonathan is studying psychology at Pomona College. He conducts computational chemistry research in Dr. Roberto Garza&#39;s lab, where he has evaluated novel corticosteroid candidates for Duchenne muscular dystrophy through virtual screening and molecular modeling of the glucocorticoid receptor.  His current research focuses on identifying small-molecule inhibitors of <i>Streptococcus mutans</i> glucansucrases for their potential use in preventing dental caries. Outside the lab, Jonathan competes on the Pomona-Pitzer Men&#39;s Swim and Dive team.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Jonathan is studying psychology at Pomona College. He conducts computational chemistry research in Dr. Roberto Garza&#39;s lab, where he has evaluated novel corticosteroid candidates for Duchenne muscular dystrophy through virtual screening and molecular modeling of the glucocorticoid receptor.  His current research focuses on identifying small-molecule inhibitors of <i>Streptococcus mutans</i> glucansucrases for their potential use in preventing dental caries. Outside the lab, Jonathan competes on the Pomona-Pitzer Men&#39;s Swim and Dive team.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Brasen.jpg" alt="Bra&#39;sen Phillips-Bates" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Bra'sen Phillips-Bates</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '28</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '28</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:bcpd2024@mymail.pomona.edu">bcpd2024@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Bra&#39;sen is a junior at Pomona College majoring in Chemistry. His current project focuses on identifying novel, AAK1-selective small-molecule inhibitors as a potential dystrophin-independent therapeutic strategy for Duchenne Muscular Dystrophy (DMD).</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Bra&#39;sen is a junior at Pomona College majoring in Chemistry. His current project focuses on identifying novel, AAK1-selective small-molecule inhibitors as a potential dystrophin-independent therapeutic strategy for Duchenne Muscular Dystrophy (DMD).</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Noah.jpeg" alt="Noah Baoerjin" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Noah Baoerjin</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:nsbj2025@mymail.pomona.edu">nsbj2025@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Noah matriculated to Pomona College in 2025 and is currently pursuing a B.A. in Chemistry with a minor in Music. He joined Dr. Garza&#39;s research group early in his first semester at Pomona College and expanded a previous PAYS research project that studied cycloguanil-resistant <i>Plasmodium falciparum</i> DHFR. He has presented this research as well as other projects at several national conferences and symposiums. Currently, Noah is wrapping up a SURP project researching chemotherapeutics and cardiotoxicity mechanisms.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Noah matriculated to Pomona College in 2025 and is currently pursuing a B.A. in Chemistry with a minor in Music. He joined Dr. Garza&#39;s research group early in his first semester at Pomona College and expanded a previous PAYS research project that studied cycloguanil-resistant <i>Plasmodium falciparum</i> DHFR. He has presented this research as well as other projects at several national conferences and symposiums. Currently, Noah is wrapping up a SURP project researching chemotherapeutics and cardiotoxicity mechanisms.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Yonten.jpeg" alt="Yonten Gyatso" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Yonten Gyatso</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:ygap2025@mymail.pomona.edu">ygap2025@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Yonten is studying neuroscience at Pomona College. In Dr. Roberto Garza&#39;s lab, he has studied 3D QSAR analysis of small-molecule inhibitors targeting the DMD-affected human GR protein. He is currently exploring free energy perturbation (FEP) methods to optimize inhibitors of HIV-1 protease identified through structural screening.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Yonten is studying neuroscience at Pomona College. In Dr. Roberto Garza&#39;s lab, he has studied 3D QSAR analysis of small-molecule inhibitors targeting the DMD-affected human GR protein. He is currently exploring free energy perturbation (FEP) methods to optimize inhibitors of HIV-1 protease identified through structural screening.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Ben.jpg" alt="Benjamin Roh" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Benjamin Roh</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:brwh2025@mymail.pomona.edu">brwh2025@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Currently a sophomore at Pomona College. Proficient in QSAR, Schr&ouml;dinger Maestro, and exploring Gaussian. Studied Duchenne Muscular Dystrophy (DMD) and now has a focus on inhibiting <i>Coccidioides immitis</i> fungal proteins and exploring their binding mechanisms. Attended and presented research on DMD at American Chemical Society (ACS) Spring 2026 in Atlanta, GA, Selective Inhibition of <i>C. immitis</i> Chitinase-1 at the 8th International Coccidioidomycosis Study Group Symposium in Davis, CA, S-Nitrosylation Mechanism at ACS Fall 2026 in Chicago, IL. Currently working on exploring the binding mechanism of <i>C. immitis</i> CYP51. Future interest in intrinsically disordered proteins. Unrelated to research, hobbies are film-watching, music, soccer, and fishing.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Currently a sophomore at Pomona College. Proficient in QSAR, Schr&ouml;dinger Maestro, and exploring Gaussian. Studied Duchenne Muscular Dystrophy (DMD) and now has a focus on inhibiting <i>Coccidioides immitis</i> fungal proteins and exploring their binding mechanisms. Attended and presented research on DMD at American Chemical Society (ACS) Spring 2026 in Atlanta, GA, Selective Inhibition of <i>C. immitis</i> Chitinase-1 at the 8th International Coccidioidomycosis Study Group Symposium in Davis, CA, S-Nitrosylation Mechanism at ACS Fall 2026 in Chicago, IL. Currently working on exploring the binding mechanism of <i>C. immitis</i> CYP51. Future interest in intrinsically disordered proteins. Unrelated to research, hobbies are film-watching, music, soccer, and fishing.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/justintopol_orig.jpeg" alt="Justin Topol" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Justin Topol</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:jste2025@mymail.pomona.edu">jste2025@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Conducting research in computational chemistry focused on identifying potential therapeutic inhibitors for disease-related molecular targets. His work includes investigating inhibitors of the BRAF V600E mutation associated with melanoma, as well as an independent project exploring inhibition of bacterial glucosyltransferase as a potential strategy for developing alternatives to fluoride in the prevention of dental caries. These projects focus on understanding protein–ligand interactions, enzyme inhibition, and the molecular basis of potential therapeutic and preventive compounds.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Conducting research in computational chemistry focused on identifying potential therapeutic inhibitors for disease-related molecular targets. His work includes investigating inhibitors of the BRAF V600E mutation associated with melanoma, as well as an independent project exploring inhibition of bacterial glucosyltransferase as a potential strategy for developing alternatives to fluoride in the prevention of dental caries. These projects focus on understanding protein–ligand interactions, enzyme inhibition, and the molecular basis of potential therapeutic and preventive compounds.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/nathanxu.jpeg" alt="Nathan Xu" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Nathan Xu</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:nxin2025@mymail.pomona.edu">nxin2025@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Research description to come.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Research description to come.</p>
       </div>
     </div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
       <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/AZ.jpeg" alt="Andrew Zheng" style="width:100%;height:100%;object-fit:cover"></div>
       <div style="max-width:560px">
         <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Andrew Zheng</h3>
-        <div style="font-size:16px;color:var(--color-neutral-500);margin-bottom:14px">Research Assistant, Class of '29</div>
+        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
         <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
           <a href="mailto:ahzn2025@mymail.pomona.edu">ahzn2025@mymail.pomona.edu</a>
         </div>
-        <p style="margin:0;color:var(--color-neutral-500);text-wrap:pretty">Andrew Zheng is a Computer Science major in the Class of 2029 at Pomona College. He joined the Garza-L&oacute;pez lab during his first semester at Pomona, where his research focuses on Duchenne muscular dystrophy (DMD) and graphene-based systems. Andrew presented his work at the American Chemical Society (ACS) Spring 2026 national conference and will be presenting at both SACNAS 2026 and EMGN 2026. He is broadly interested in computational chemistry and biotechnology.</p>
+        <p style="margin:0;color:#000;text-wrap:pretty">Andrew Zheng is a Computer Science major in the Class of 2029 at Pomona College. He joined the Garza-L&oacute;pez lab during his first semester at Pomona, where his research focuses on Duchenne muscular dystrophy (DMD) and graphene-based systems. Andrew presented his work at the American Chemical Society (ACS) Spring 2026 national conference and will be presenting at both SACNAS 2026 and EMGN 2026. He is broadly interested in computational chemistry and biotechnology.</p>
       </div>
     </div>
     </div>
@@ -392,7 +392,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 
   <section style="padding:56px 0 64px">
     <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 32px">PAYS Alumni</h2>
-    <figure style="margin:0;max-width:900px"><div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/garzapays_orig.jpeg" alt="PAYS alumni with Dr. Garza-López" style="width:100%;aspect-ratio:16/9;object-fit:cover"></div><figcaption style="font-size:14px;color:var(--color-neutral-500);margin-top:12px">Left to right: Vivian Phan '24, Berlyn Sanchez '24, Roberto Garza-Lopez, Ashley Vicente '24, Aracely Saldivar '24</figcaption></figure>
+    <figure style="margin:0;max-width:900px"><div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/garzapays_orig.jpeg" alt="PAYS alumni with Dr. Garza-López" style="width:100%;aspect-ratio:16/9;object-fit:cover"></div><figcaption style="font-size:14px;color:#000;margin-top:12px">Left to right: Vivian Phan '24, Berlyn Sanchez '24, Roberto Garza-Lopez, Ashley Vicente '24, Aracely Saldivar '24</figcaption></figure>
   </section>
 
   <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
@@ -413,18 +413,18 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 <div data-screen-label="Publications" style="max-width:1200px;margin:0 auto;padding:0 32px">
   <section style="padding:80px 0 40px;max-width:760px">
     <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0 0 20px">Publications</h1>
-    <p style="margin:0;color:var(--color-neutral-500);font-size:14px">Full list on <a href="https://www.researchgate.net/scientific-contributions/Roberto-A-Garza-Lopez-14360169" target="_blank">ResearchGate</a>.</p>
+    <p style="margin:0;color:#000;font-size:14px">Full list on <a href="https://www.researchgate.net/scientific-contributions/Roberto-A-Garza-Lopez-14360169" target="_blank">ResearchGate</a>.</p>
   </section>
   <section style="padding-bottom:96px">
     <sc-for list="{{ pubYears }}" as="y" hint-placeholder-count="4">
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px 40px;padding:32px 0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent) no-repeat top / 100% 1px">
-        <div style="font-size:28px;font-weight:500;letter-spacing:-.015em;color:var(--color-accent);line-height:1">{{ y.year }}</div>
+        <div style="font-size:28px;font-weight:500;letter-spacing:-.015em;color:#000;line-height:1">{{ y.year }}</div>
         <div style="display:flex;flex-direction:column;gap:22px">
           <sc-for list="{{ y.items }}" as="p" hint-placeholder-count="2">
             <div>
               <div style="font-size:17px;font-weight:500;line-height:1.35;margin-bottom:4px">{{ p.title }}</div>
-              <div style="font-size:14px;color:var(--color-neutral-400);margin-bottom:6px">{{ p.authors }}</div>
-              <div style="font-size:13px;color:var(--color-neutral-500);display:flex;gap:12px;flex-wrap:wrap"><span><em>{{ p.journal }}</em> {{ p.ref }}</span><a href="{{ p.url }}" target="_blank">{{ p.doi }}</a></div>
+              <div style="font-size:14px;color:#000;margin-bottom:6px">{{ p.authors }}</div>
+              <div style="font-size:13px;color:#000;display:flex;gap:12px;flex-wrap:wrap"><span><em>{{ p.journal }}</em> {{ p.ref }}</span><a href="{{ p.url }}" target="_blank">{{ p.doi }}</a></div>
             </div>
           </sc-for>
         </div>
@@ -443,10 +443,10 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
   <section style="padding-bottom:96px;max-width:860px">
     <sc-for list="{{ news }}" as="n" hint-placeholder-count="4">
       <div style="display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:24px;padding:24px 0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent) no-repeat top / 100% 1px">
-        <div style="font-size:13px;color:var(--color-neutral-500);padding-top:3px">{{ n.date }}</div>
+        <div style="font-size:13px;color:#000;padding-top:3px">{{ n.date }}</div>
         <div>
           <div style="font-size:18px;font-weight:500;line-height:1.3;margin-bottom:6px">{{ n.title }}</div>
-          <p style="margin:0;color:var(--color-neutral-400);font-size:14.5px;text-wrap:pretty">{{ n.text }}</p>
+          <p style="margin:0;color:#000;font-size:14.5px;text-wrap:pretty">{{ n.text }}</p>
         </div>
       </div>
     </sc-for>
