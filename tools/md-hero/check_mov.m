@@ -15,11 +15,15 @@ int main(int argc, const char *argv[]) {
         FourCharCode sub = CMFormatDescriptionGetMediaSubType(desc);
         CFTypeRef alpha = CMFormatDescriptionGetExtension(
             desc, kCMFormatDescriptionExtension_ContainsAlphaChannel);
+        CFTypeRef mode = CMFormatDescriptionGetExtension(
+            desc, kCMFormatDescriptionExtension_AlphaChannelMode);
         CMVideoDimensions dims = CMVideoFormatDescriptionGetDimensions(desc);
-        printf("codec=%c%c%c%c alpha=%s size=%dx%d seconds=%.2f\n",
+        printf("codec=%c%c%c%c alpha=%s mode=%s size=%dx%d seconds=%.2f kbps=%.0f\n",
                (char)(sub >> 24), (char)(sub >> 16), (char)(sub >> 8), (char)sub,
                alpha == kCFBooleanTrue ? "true" : "false",
-               dims.width, dims.height, CMTimeGetSeconds(asset.duration));
+               mode ? [(__bridge NSString *)mode UTF8String] : "unspecified",
+               dims.width, dims.height, CMTimeGetSeconds(asset.duration),
+               track.estimatedDataRate / 1000.0);
     }
     return 0;
 }

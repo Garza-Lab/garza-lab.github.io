@@ -10,8 +10,9 @@ source frames.
 ## Requirements (macOS)
 
 - PyMOL 3.x — its bundled Python provides `pymol` and numpy
-- Blender 4.4 or newer — encodes WebM/VP9 with alpha and ProRes 4444
-- `avconvert` — ships with macOS; writes the HEVC-with-alpha file Safari needs
+- Blender 4.4 or newer — encodes the WebM (VP9 with alpha) and the poster
+- Xcode Command Line Tools (`clang`) — builds `encode_hevc.m`, which drives
+  macOS's encoder for the HEVC-with-alpha file Safari needs
 
 ## Render
 
@@ -48,7 +49,7 @@ clang -fobjc-arc -framework Foundation -framework AVFoundation \
 
 Outputs `e6-hero.webm` (Chrome, Firefox, Edge), `e6-hero.mov` (Safari, iOS)
 and `e6-hero-poster.webp`. Keep each video under ~3 MB: raise the 4th
-argument of `encode.sh` (VP9 CRF) or lower the 5th (ProRes scale, percent).
+argument of `encode.sh` (VP9 CRF) or lower the 5th (HEVC bitrate, kbps).
 
 ## Tests
 
