@@ -55,6 +55,9 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
   .md-hero-text{padding:24px 0 0}
   .md-hero-media{justify-self:center;width:var(--md-size)}
   .md-band-text{max-width:none}
+  /* phones keep the original header sizes so the nav doesn't wrap to 4 rows */
+  nav a{font-size:17px !important}
+  nav a:first-child{font-size:19px !important}
 }
 </style>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
@@ -62,13 +65,13 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 <div style="min-height:100vh;display:flex;flex-direction:column;background:var(--color-bg);color:var(--color-text)">
 
 <nav style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;padding:14px 32px;background:color-mix(in srgb, var(--color-bg) 85%, transparent);backdrop-filter:blur(12px);max-width:1200px;width:100%;margin:0 auto">
-  <a href="#home" onClick="{{ go.home }}" style="font-weight:500;font-size:19px;letter-spacing:-.01em;color:var(--color-text);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:10px">Garza Lab</a>
-  <a href="#home" onClick="{{ go.home }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.home }}" style-hover="text-decoration:underline">Home</a>
-  <a href="#research" onClick="{{ go.research }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.research }}" style-hover="text-decoration:underline">Research</a>
-  <a href="#team" onClick="{{ go.team }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.team }}" style-hover="text-decoration:underline">Team</a>
-  <a href="#publications" onClick="{{ go.publications }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.publications }}" style-hover="text-decoration:underline">Publications</a>
-  <a href="#news" onClick="{{ go.news }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.news }}" style-hover="text-decoration:underline">News</a>
-  <a href="#contact" onClick="{{ go.contact }}" style="font-size:17px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.contact }}" style-hover="text-decoration:underline">Contact</a>
+  <a href="#home" onClick="{{ go.home }}" style="font-weight:500;font-size:28.5px;letter-spacing:-.01em;color:var(--color-text);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:10px">Garza Lab</a>
+  <a href="#home" onClick="{{ go.home }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.home }}" style-hover="text-decoration:underline">Home</a>
+  <a href="#research" onClick="{{ go.research }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.research }}" style-hover="text-decoration:underline">Research</a>
+  <a href="#team" onClick="{{ go.team }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.team }}" style-hover="text-decoration:underline">Team</a>
+  <a href="#publications" onClick="{{ go.publications }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.publications }}" style-hover="text-decoration:underline">Publications</a>
+  <a href="#news" onClick="{{ go.news }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.news }}" style-hover="text-decoration:underline">News</a>
+  <a href="#contact" onClick="{{ go.contact }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.contact }}" style-hover="text-decoration:underline">Contact</a>
 </nav>
 
 <main ref="{{ mainRef }}" style="flex:1;width:100%">
