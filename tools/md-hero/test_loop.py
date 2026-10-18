@@ -1,8 +1,9 @@
 import numpy as np
 import pytest
 
-from loop import (align_frames, gaussian_smooth, pick_window, replica_ranges,
-                  rmsd, seam_blend, superpose)
+from loop import (align_frames, align_sequential, eased_times, gaussian_smooth,
+                  interpolate, pick_window, pingpong_order, replica_ranges, rmsd,
+                  seam_blend, superpose)
 
 RNG = np.random.default_rng(0)
 
@@ -106,3 +107,47 @@ def test_seam_blend_wraps_onto_the_natural_next_frame():
 def test_seam_blend_needs_length_plus_blend_frames():
     with pytest.raises(ValueError):
         seam_blend(np.zeros((45, 1, 3)), 40, 10)
+
+
+def test_align_sequential_removes_tumbling():
+    base = RNG.normal(size=(15, 3))
+    frames = np.stack([base @ rotation([1, 1, 0], 25 * k).T + [k, 0.0, 0.0] for k in range(6)])
+    out = align_sequential(frames, np.arange(15))
+    assert np.allclose(out, base, atol=1e-6)
+
+
+def test_align_sequential_keeps_internal_motion():
+    base = RNG.normal(size=(15, 3))
+    frames = np.stack([base.copy() for _ in range(3)])
+    frames[1, -1] += [2.0, 0.0, 0.0]
+    frames[2] = frames[2] @ rotation([0, 0, 1], 90).T
+    out = align_sequential(frames, np.arange(14))
+    assert np.allclose(out[1, -1], base[-1] + [2.0, 0.0, 0.0], atol=1e-6)
+    assert np.allclose(out[2], base, atol=1e-6)
+
+
+def test_eased_times_span_and_pace():
+    t = eased_times(120, 360, 30)
+    assert t.shape == (360,)
+    assert t[0] == 0.0 and np.isclose(t[-1], 119.0)
+    steps = np.diff(t)
+    assert (steps > 0).all()
+    assert np.allclose(steps[40:-40], steps[180])            # constant pace mid-pass
+    assert steps[0] < 0.1 * steps[180] and steps[-1] < 0.1 * steps[180]
+
+
+def test_eased_times_without_easing_is_linear():
+    assert np.allclose(eased_times(5, 9, 0), np.linspace(0, 4, 9))
+
+
+def test_pingpong_order_never_repeats_a_frame_at_the_turns():
+    order = pingpong_order(4)
+    assert order == [0, 1, 2, 3, 2, 1]
+    loop = order + order[:1]
+    assert all(abs(a - b) == 1 for a, b in zip(loop, loop[1:]))
+
+
+def test_interpolate_hits_frames_and_midpoints():
+    coords = np.arange(3, dtype=float)[:, None, None] * np.ones((1, 2, 3))
+    out = interpolate(coords, np.array([0.0, 0.5, 1.0, 2.0]))
+    assert np.allclose(out[:, 0, 0], [0.0, 0.5, 1.0, 2.0])

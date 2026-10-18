@@ -88,3 +88,48 @@ def seam_blend(seq, length, blend):
         a = a.reshape((-1,) + (1,) * (seq.ndim - 1))
         out[:blend] = a * seq[:blend] + (1 - a) * seq[length:length + blend]
     return out.astype(seq.dtype)
+
+
+# --- Ping-pong loops, for stretches whose ends don't match (e.g. disordered chains) ---
+
+def align_sequential(coords, idx):
+    """Superpose each frame onto the previous (already superposed) one using idx.
+
+    Removes overall tumbling but keeps internal motion; suits disordered chains
+    that have no rigid core to align on.
+    """
+    out = np.empty_like(coords)
+    out[0] = coords[0]
+    for i in range(1, len(coords)):
+        r, t = superpose(coords[i][idx], out[i - 1][idx])
+        out[i] = coords[i] @ r.T + t
+    return out
+
+
+def eased_times(n_src, n_out, ease):
+    """Source-frame positions (0 .. n_src-1) for n_out output frames.
+
+    Constant pace, with cosine velocity ramps over the first and last `ease`
+    frames so the motion comes to rest before a ping-pong turn.
+    """
+    v = np.ones(n_out - 1)
+    if ease:
+        ramp = 0.5 - 0.5 * np.cos(np.pi * (np.arange(ease) + 0.5) / ease)
+        v[:ease] = ramp
+        v[-ease:] = ramp[::-1]
+    pos = np.concatenate([[0.0], np.cumsum(v)])
+    return pos * (n_src - 1) / pos[-1]
+
+
+def pingpong_order(n):
+    """Play frames 0..n-1 and back down to 1, so no frame repeats at a turn."""
+    return list(range(n)) + list(range(n - 2, 0, -1))
+
+
+def interpolate(coords, times):
+    """Linearly interpolate (frames, atoms, 3) at fractional frame positions."""
+    times = np.asarray(times, dtype=float)
+    lo = np.clip(np.floor(times).astype(int), 0, len(coords) - 1)
+    hi = np.minimum(lo + 1, len(coords) - 1)
+    w = (times - lo).reshape((-1,) + (1,) * (coords.ndim - 1))
+    return ((1 - w) * coords[lo] + w * coords[hi]).astype(coords.dtype)
