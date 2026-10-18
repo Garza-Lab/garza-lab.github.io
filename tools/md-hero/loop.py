@@ -133,3 +133,47 @@ def interpolate(coords, times):
     hi = np.minimum(lo + 1, len(coords) - 1)
     w = (times - lo).reshape((-1,) + (1,) * (coords.ndim - 1))
     return ((1 - w) * coords[lo] + w * coords[hi]).astype(coords.dtype)
+
+
+# --- Flipbooks: still renders that hold, then dissolve into the next ---
+
+def flipbook_schedule(n, hold, fade):
+    """(pose, next pose, weight) for every output frame.
+
+    Each pose is held for `hold` frames, then dissolves into the next over
+    `fade` frames; the last pose dissolves back into the first.
+    """
+    out = []
+    for i in range(n):
+        out += [(i, i, 0.0)] * hold
+        out += [(i, (i + 1) % n, k / (fade + 1)) for k in range(1, fade + 1)]
+    return out
+
+
+def crossfade(a, b, w):
+    """Mix two straight-alpha RGBA uint8 images as if each were composited.
+
+    Premultiplies, mixes by w, then un-premultiplies, so a fading molecule's
+    edges don't darken against a transparent background.
+    """
+    a = a.astype(float) / 255
+    b = b.astype(float) / 255
+    alpha = (1 - w) * a[..., 3:] + w * b[..., 3:]
+    mixed = (1 - w) * a[..., :3] * a[..., 3:] + w * b[..., :3] * b[..., 3:]
+    rgb = np.where(alpha > 0, mixed / np.maximum(alpha, 1e-12), 0.0)
+    return np.round(np.concatenate([rgb, alpha], axis=-1) * 255).astype(np.uint8)
+
+
+def radial_fade(img, inner, outer):
+    """Fade an RGBA image's alpha to zero between `inner` and `outer`.
+
+    Radii are fractions of the half-size from the image centre, so anything
+    reaching past the window dissolves instead of being cut at the edge.
+    """
+    h, w = img.shape[:2]
+    y, x = np.mgrid[0:h, 0:w]
+    r = np.hypot((x + 0.5 - w / 2) / (w / 2), (y + 0.5 - h / 2) / (h / 2))
+    t = np.clip((r - inner) / (outer - inner), 0.0, 1.0)
+    out = img.copy()
+    out[..., 3] = np.round(img[..., 3] * (1 - t * t * (3 - 2 * t))).astype(np.uint8)
+    return out
