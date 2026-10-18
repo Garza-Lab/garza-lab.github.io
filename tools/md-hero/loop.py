@@ -135,6 +135,43 @@ def interpolate(coords, times):
     return ((1 - w) * coords[lo] + w * coords[hi]).astype(coords.dtype)
 
 
+def true_runs(mask):
+    """[start, stop) of each run of True values in a 1-D boolean array."""
+    edges = np.diff(np.concatenate([[0], np.asarray(mask, dtype=int), [0]]))
+    return list(zip(np.nonzero(edges == 1)[0].tolist(), np.nonzero(edges == -1)[0].tolist()))
+
+
+def restore_helices(frames, raw, src, helix, residues, fit, pad=2):
+    """Give each displayed helix the shape it has in its own raw frame.
+
+    Smoothing and interpolating a disordered chain crumples a helix that lasts a
+    frame or two. For output frame i, each run of helical residues in helix[src[i]]
+    takes its coordinates from raw[src[i]], superposed onto frames[i] using the
+    `fit` atoms of the run; the `pad` residues on either side blend linearly from
+    that raw shape back to the smoothed chain.
+
+    frames: (n_out, atoms, 3) display coordinates; raw: (n_src, atoms, 3); src:
+    source frame shown at each output frame; helix: (n_src, residues) bools;
+    residues / fit: per residue, the atom indices to move / to superpose on.
+    """
+    out = frames.copy()
+    for i, k in enumerate(src):
+        weight = np.zeros(len(residues))
+        target = {}
+        for a, b in true_runs(helix[k]):
+            idx = np.concatenate([fit[r] for r in range(a, b)])
+            rot, t = superpose(raw[k][idx], frames[i][idx])
+            for r in range(max(0, a - pad), min(len(residues), b + pad)):
+                w = 1.0 - max(a - r, r - (b - 1), 0) / (pad + 1)
+                if w > weight[r]:
+                    weight[r] = w
+                    target[r] = raw[k][residues[r]] @ rot.T + t
+        for r, goal in target.items():
+            atoms = residues[r]
+            out[i][atoms] = weight[r] * goal + (1 - weight[r]) * frames[i][atoms]
+    return out
+
+
 # --- Flipbooks: still renders that hold, then dissolve into the next ---
 
 def flipbook_schedule(n, hold, fade):

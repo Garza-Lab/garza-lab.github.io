@@ -4,8 +4,8 @@ import pytest
 from loop import (align_frames, align_sequential, crossfade, eased_times,
                   flipbook_schedule, gaussian_smooth,
                   interpolate, pick_window, pingpong_order, radial_fade,
-                  replica_ranges, rmsd,
-                  seam_blend, superpose)
+                  replica_ranges, restore_helices, rmsd,
+                  seam_blend, superpose, true_runs)
 
 RNG = np.random.default_rng(0)
 
@@ -184,3 +184,53 @@ def test_radial_fade_keeps_centre_and_clears_corners():
     assert out[0, 0, 3] == 0                         # corners gone
     assert 0 < out[50, 94, 3] < 255                  # partway through the fade
     assert np.array_equal(out[..., :3], img[..., :3])   # colour untouched
+
+
+def test_true_runs_finds_each_run():
+    assert true_runs([0, 1, 1, 0, 1, 0, 0, 1, 1]) == [(1, 3), (4, 5), (7, 9)]
+    assert true_runs([0, 0]) == []
+
+
+def chain(n_res, atoms_per_res=4):
+    """Random chain: per residue, its atom indices (all four used for fitting)."""
+    residues = [np.arange(r * atoms_per_res, (r + 1) * atoms_per_res) for r in range(n_res)]
+    return RNG.normal(scale=3.0, size=(n_res * atoms_per_res, 3)), residues
+
+
+def test_restore_helices_gives_the_helix_its_raw_shape():
+    raw0, residues = chain(10)
+    frames = (raw0 @ rotation([0, 1, 1], 30).T + [4.0, 0, 0])[None].copy()
+    helix_atoms = np.concatenate(residues[3:7])
+    frames[0][helix_atoms] += RNG.normal(scale=0.8, size=(len(helix_atoms), 3))  # crumpled
+    helix = np.zeros((1, 10), bool); helix[0, 3:7] = True
+    out = restore_helices(frames, raw0[None], [0], helix, residues, residues)
+    d = lambda x: np.linalg.norm(x[:, None] - x[None], axis=-1)
+    assert np.allclose(d(out[0][helix_atoms]), d(raw0[helix_atoms]))   # raw geometry
+    far = np.concatenate(residues[:1] + residues[9:])
+    assert np.allclose(out[0][far], frames[0][far])                    # untouched
+
+
+def test_restore_helices_blends_the_padding_residues():
+    raw0, residues = chain(12)
+    frames = raw0[None].copy()
+    shift = np.array([3.0, 0, 0])
+    for r in (2, 3, 4, 9, 10, 11):                                     # around the helix
+        frames[0][residues[r]] += shift
+    helix = np.zeros((1, 12), bool); helix[0, 5:9] = True
+    out = restore_helices(frames, raw0[None], [0], helix, residues, residues, pad=2)
+    moved = lambda r: (out[0][residues[r]] - raw0[residues[r]]).mean(axis=0)
+    assert np.allclose(moved(4), shift / 3) and np.allclose(moved(3), 2 * shift / 3)
+    assert np.allclose(moved(2), shift)
+    assert np.allclose(moved(9), shift / 3) and np.allclose(moved(10), 2 * shift / 3)
+
+
+def test_restore_helices_uses_the_frame_shown_and_skips_coil_frames():
+    raw, residues = chain(6)
+    raw = np.stack([raw, raw + 1.0])
+    frames = np.stack([raw[0], raw[0], raw[0]]) + 0.5
+    helix = np.zeros((2, 6), bool); helix[1, 1:4] = True
+    out = restore_helices(frames, raw, [0, 1, 0], helix, residues, residues)
+    assert np.allclose(out[0], frames[0]) and np.allclose(out[2], frames[2])
+    seg = np.concatenate(residues[1:4])
+    assert np.allclose(out[1][seg], frames[1][seg])     # raw[1] shape == frames shape here
+

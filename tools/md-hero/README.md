@@ -53,25 +53,41 @@ and `e6-hero-poster.webp`. The defaults keep each video under ~3 MB (WebM
 argument of `encode.sh` (VP9 CRF) or lower the 5th (HEVC color bitrate, kbps)
 or 6th (HEVC alpha quality, 0–1).
 
-## Research page: Aβ42 cartoon loop
+## Research page: NUPR1 cartoon loop
 
-`render_cartoon.py` makes the hotpink Aβ42 movie on the Research page
-(`uploads/research/`). It shows the simplified DSSP (H/E/C, MDTraj) of every
-frame as cartoon helices/strands, so transient structure appears exactly where
-and when it occurs. The stretch plays forward then backward (ping-pong) with
-eased turns, because a disordered chain's start and end never match.
+`render_cartoon.py` makes the cyan NUPR1 movie beside Intrinsically Disordered
+Proteins (`uploads/research/nupr1-baies.*`), in the lab's `IDP_style()` with its
+thicker disordered-chain tube. It shows the simplified DSSP (H/E/C, MDTraj) of
+every frame as cartoon helices/strands, so transient structure appears exactly
+where and when it occurs. Coordinates are smoothed for display, but each helix is
+drawn in the shape it has in its own raw frame; smoothing alone would crumple a
+helix that lasts a frame or two. The stretch plays forward then backward
+(ping-pong) with eased turns, because a disordered chain's start and end never
+match.
 
-Current loop: `AB42_bAIes_full_protein.xtc` frames 27441–27560 (replica 42,
-frames 94–213, 12 ns), the 12 ns stretch with the most helix/strand frames.
+Current loop: `NUPR1_bAIes_all_120000_frames.xtc` frames 70725–70784 (replica 71,
+stored frames 726–785; 6 ns of bAIes time, which is not physical kinetics). Of the
+6 ns stretches in all 120 replicas, it is the one in which a helix of two turns
+or more (residues ~70–78, near the C-terminus) appears most often.
 
 ```bash
-ARGS="--top AB42_bAIes_full_protein.pdb --traj AB42_bAIes_full_protein.xtc --first 27441 --count 120"
+D=nupr1_baies_all_frames_20261017_v1
+ARGS="--top $D/NUPR1_bAIes_all_120000_frames.pdb --traj $D/NUPR1_bAIes_all_120000_frames.xtc
+      --first 70725 --count 60 --sigma 2 --color cyan
+      --style ~/.pymol/startup/IDP_style.py --size 900"
 for k in 0 1 2 3; do
-  $PYMOL_PY tools/md-hero/render_cartoon.py $ARGS --out /tmp/md-hero/ab42 --part $k --parts 4 &
+  $PYMOL_PY tools/md-hero/render_cartoon.py $ARGS --out /tmp/md-hero/nupr1 --part $k --parts 4 &
 done; wait
-$PYMOL_PY tools/md-hero/render_cartoon.py --out /tmp/md-hero/ab42 --mirror   # return pass
-NAME=ab42-baies tools/md-hero/encode.sh /tmp/md-hero/ab42 uploads/research 30 36 450 0.6
+$PYMOL_PY tools/md-hero/render_cartoon.py --out /tmp/md-hero/nupr1 --mirror   # return pass
+NAME=nupr1-baies tools/md-hero/encode.sh /tmp/md-hero/nupr1 uploads/research 30 40 450 0.5
 ```
+
+The 24 s loop comes to WebM 1.7 MB and .mov 2.3 MB: the thin chain covers little of
+the frame, so it affords a lower CRF than the receptor movie.
+
+This replaced a hotpink Aβ42 loop in the homepage's matte look
+(`AB42_bAIes_full_protein.xtc` frames 27441–27560), made with `render_cartoon.py`
+as of commit 8955c8a.
 
 ## Research page: NUPR1–ZZW115 docking flipbook
 
