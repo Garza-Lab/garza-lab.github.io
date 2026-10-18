@@ -156,6 +156,45 @@ clean at the ~550 px it is shown.
 
 Add `--size 480 --every 2 --draft` (and a 15 fps encode) for a quick preview.
 
+## Research page: tyrosinase–taxifolin zoom
+
+`render_site.py` makes the movie in Enzyme Catalysis
+(`uploads/research/tyrosinase-taxifolin.*`): human tyrosinase as a white cartoon
+with taxifolin (cyan) in its pocket, in the lab's `IDP_style()`. It holds on the
+whole enzyme, zooms into the dicopper active site, holds, and zooms back out. The
+site shows the two copper ions and the bridging peroxide as spheres in PyMOL's
+element colors, the side chains of the six copper-binding histidines (180, 202,
+211, 363, 367, 390; white carbons, blue nitrogens; taxifolin has cyan carbons and
+red oxygens) and dotted black lines for every metal bond (Cu–N and Cu–O within
+2.6 Å in the median frame). Taxifolin's nearest oxygen stays 3.5–4.4 Å
+from CuB in every frame, so it gets no coordination line. The camera looks at
+the site from its most open side that keeps the ligand beside the metals.
+
+Source: the Desmond run `taxifolin_sample-out.cms` + `taxifolin_sample_trj`
+(100 ns, 1,001 frames). Current loop: every 2nd frame from 132 to 970, i.e. 84 ns
+in a 12 s loop (window ends 2.1 Å apart, blended over 2 s).
+
+`desmond_to_xtc.py` first turns the run into a PDB + XTC of the solute (it drops
+water, ions and the force field's virtual sites):
+
+```bash
+D=path/to/desmond_run
+$PYMOL_PY tools/md-hero/desmond_to_xtc.py --cms $D/taxifolin_sample-out.cms \
+    --trj $D/taxifolin_sample_trj --out /tmp/md-hero/taxifolin
+for k in 0 1 2 3; do
+  $PYMOL_PY tools/md-hero/render_site.py --top /tmp/md-hero/taxifolin.pdb \
+      --traj /tmp/md-hero/taxifolin.xtc --segment 0 1001 --stride 2 --sigma 3 \
+      --style ~/.pymol/startup/IDP_style.py --ligand 999 cyan --spheres 'resn CU+PER' \
+      --size 800 --out /tmp/md-hero/tyrosinase --part $k --parts 4 &
+done; wait
+NAME=tyrosinase-taxifolin tools/md-hero/encode.sh /tmp/md-hero/tyrosinase uploads/research 30 54 450 0.4
+```
+
+During a zoom every pixel moves, which costs the encoder far more than slow MD
+motion: at 900 px and CRF 48 this loop's WebM was 5.8 MB. 800 px with CRF 54
+brings it to 3.7 MB (.mov 2.2 MB) and still looks clean at the ~550 px it is
+shown.
+
 ## Tests
 
 ```bash

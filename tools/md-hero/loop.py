@@ -172,6 +172,65 @@ def restore_helices(frames, raw, src, helix, residues, fit, pad=2):
     return out
 
 
+# --- Camera: a looping zoom from the whole molecule into a site and back ---
+
+def zoom_schedule(hold_out, move, hold_in):
+    """Zoom amount per output frame (0 = wide, 1 = close): hold wide, ease in over
+    `move` frames, hold close, ease back out; the last frame leads into the first."""
+    ramp = 0.5 - 0.5 * np.cos(np.pi * np.arange(1, move + 1) / (move + 1))
+    return np.concatenate([np.zeros(hold_out), ramp, np.ones(hold_in), ramp[::-1]])
+
+
+def zoom_camera(wide, close, s):
+    """Picture center and half-height at zoom amount s between two (center,
+    half-height) views. The half-height changes geometrically (an even zoom rate)
+    and the center moves so the close-up glides steadily into the middle. Also
+    returns how far the move has gone (0..1), for anything that moves with it."""
+    (c0, h0), (c1, h1) = wide, close
+    h = h0 ** (1 - s) * h1 ** s
+    w = (h0 - h) / (h0 - h1)
+    return np.asarray(c0) + w * (np.asarray(c1) - np.asarray(c0)), h, w
+
+
+def fibonacci_sphere(n):
+    """n nearly evenly spread unit vectors."""
+    k = np.arange(n) + 0.5
+    z = 1 - 2 * k / n
+    phi = np.pi * (1 + 5 ** 0.5) * k
+    r = np.sqrt(1 - z ** 2)
+    return np.stack([r * np.cos(phi), r * np.sin(phi), z], axis=1)
+
+
+def clear_view(points, target, radius=6.0, n=600, across=None, max_cos=1.0):
+    """Unit vector toward the viewer along which least is in the way of `target`:
+    each point in front of it counts by how near it passes the line of sight
+    (a Gaussian of width `radius`). With `across`, only directions at least
+    arccos(max_cos) away from that axis are considered, so things lying along
+    it stay side by side in the picture."""
+    rel = np.asarray(points, dtype=float) - target
+    dirs = fibonacci_sphere(n)
+    if across is not None:
+        axis = np.asarray(across, dtype=float) / np.linalg.norm(across)
+        dirs = dirs[np.abs(dirs @ axis) <= max_cos]
+    along = rel @ dirs.T
+    perp2 = (rel ** 2).sum(axis=1)[:, None] - along ** 2
+    blocked = np.where(along > 0, np.exp(-perp2 / (2 * radius ** 2)), 0.0)
+    return dirs[np.argmin(blocked.sum(axis=0))]
+
+
+def view_basis(d, along, up):
+    """Rows x, y, z of a camera rotation looking down -d (z = d points at the
+    viewer), with the direction `along` horizontal and the offset `up` pointing
+    up the picture."""
+    d = np.asarray(d, dtype=float) / np.linalg.norm(d)
+    x = np.asarray(along, dtype=float) - np.dot(along, d) * d
+    x /= np.linalg.norm(x)
+    y = np.cross(d, x)
+    if np.dot(up, y) < 0:
+        x, y = -x, -y
+    return np.stack([x, y, d])
+
+
 # --- Flipbooks: still renders that hold, then dissolve into the next ---
 
 def flipbook_schedule(n, hold, fade):
