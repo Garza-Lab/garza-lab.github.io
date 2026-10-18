@@ -64,6 +64,10 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 .news-grid > sc-for{display:contents}
 @media (max-width:900px){.news-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:600px){.news-grid{grid-template-columns:1fr;gap:44px}}
+/* Team: cards, three per row with the photo on top; two on tablets, one on phones. */
+.team-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:64px 32px;align-items:start}
+@media (max-width:900px){.team-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:600px){.team-grid{grid-template-columns:1fr;gap:48px}}
 </style>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
 </helmet>
@@ -222,175 +226,136 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 
   <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
 
-  <section style="padding:56px 0 64px">
-    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 36px">Principal Investigator</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:40px 48px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/garzapic.jpg" alt="Dr. Roberto A. Garza-López" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(24px,2.4vw,32px);font-weight:500;line-height:1.12;letter-spacing:-.02em;margin:0 0 8px">Dr. Roberto A. Garza-López</h3>
-        <div style="font-size:17px;color:#000;margin-bottom:20px">Professor of Chemistry, Pomona College</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:24px">
+  <section style="padding:56px 0 72px">
+    <div class="team-grid">
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/garzapic.jpg" alt="Dr. Roberto A. Garza-López" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Dr. Roberto A. Garza-López</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Professor of Chemistry, Pomona College</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:rgarza@pomona.edu">rgarza@pomona.edu</a>
           <a href="https://www.researchgate.net/scientific-contributions/Roberto-A-Garza-Lopez-14360169" target="_blank">ResearchGate</a>
         </div>
-        <div style="display:flex;flex-direction:column;gap:14px;color:#000;margin-bottom:24px;text-wrap:pretty">
+        <div style="display:flex;flex-direction:column;gap:12px;color:#000;text-wrap:pretty">
           <p style="margin:0">Roberto earned his B.S. in chemical engineering at Texas A&amp;M University, an M.S. in chemistry at the University of Texas at El Paso, and his Ph.D. in chemistry at the University of Georgia in 1991, where he stayed on as a postdoctoral associate.</p>
           <p style="margin:0">He joined Pomona College in 1992 and is now a full professor of theoretical and computational physical chemistry, with more than thirty peer-reviewed articles in statistical thermodynamics, stochastic processes, molecular mechanics, and random walks and diffusion-controlled reactions on fractal and Euclidean surfaces. He was the first Cambridge-Pomona exchange professor, and held sabbaticals in the laboratories of Richard Zare at Stanford and Nobel laureate Ahmed Zewail at Caltech — whose autobiography he translated into Spanish as <em>Viaje a Través del Tiempo: senderos hacia el Premio Nobel</em>.</p>
           <p style="margin:0">His current work, in long-standing collaboration with Harry Gray and John J. Kozak, spans protein folding and visualization, energy transfer in dendrimers, and computational drug design. He has taught in the Pomona Academy for Youth Success (PAYS) program since its inception, bringing high-school students into research with open-source computational tools.</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
-
-  <section style="padding:56px 0 64px">
-    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 36px">Postbaccalaureate Researcher</h2>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/1736924018937.jpg" alt="Liam Kwak" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(1.15);transform-origin:50% 12%"></div>
-      <div style="max-width:520px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Liam Kwak</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Postbaccalaureate Fellow, Class of '26</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/1736924018937.jpg" alt="Liam Kwak" style="width:100%;height:100%;object-fit:cover;object-position:50% 12%;transform:scale(1.15);transform-origin:50% 12%"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Liam Kwak</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Postbaccalaureate Fellow, Class of '26</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:liam.kwak@pomona.edu">liam.kwak@pomona.edu</a>
           <a href="https://orcid.org/0009-0009-4949-9686" target="_blank">ORCID</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Liam obtained a B.S. in Chemistry from Pomona College in 2026. During his time at Pomona College he joined the group of Dr. Roberto Garza where he completed a senior thesis with distinction for studying mu-opioid receptor allosteric modulation. Upon completing his undergraduate studies in 2026, he returned to the Garza Lab as a postbaccalaureate fellow. Currently, he is investigating how small molecules bind to intrinsically disordered proteins using molecular dynamics simulations in connection to experimental NMR methods.</p>
-      </div>
-    </div>
-  </section>
-
-  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
-
-  <section style="padding:56px 0 64px">
-    <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 36px">Undergraduate Researchers</h2>
-    <div style="display:flex;flex-direction:column;gap:48px">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Ian.jpg" alt="Ian Tam" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Ian Tam</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '27</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/Ian.jpg" alt="Ian Tam" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Ian Tam</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '27</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:iwtp2023@mymail.pomona.edu">iwtp2023@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Ian is studying chemistry and applied math at Pomona College with a minor in music. In the lab of Dr. Roberto Garza, he has studied the binding mechanisms of flavonoid compounds to tyrosinase. He is currently investigating force fields for more accurate molecular dynamics (MD) simulations of intrinsically disordered proteins (IDPs). Ian is a clarinetist in the Pomona College Orchestra and plays in a clarinet-violin-piano trio.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/andrewchung_orig.jpeg" alt="Andrew Chung" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Andrew Chung</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '28</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/andrewchung_orig.jpeg" alt="Andrew Chung" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Andrew Chung</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '28</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:acck2024@mymail.pomona.edu">acck2024@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Andrew is studying chemistry at Pomona College. In Dr. Roberto Garza&#39;s lab, his research uses molecular dynamics simulations to probe the mechanisms of ROR&gamma;t inverse agonists as potential modulators of Th17-driven autoimmunity. His work bridges computational biophysics with wet-lab immunology experience, and he is working toward a career as a physician-scientist in this space.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Jonathan.jpeg" alt="Jonathan Cong" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Jonathan Cong</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '28</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/Jonathan.jpeg" alt="Jonathan Cong" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Jonathan Cong</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '28</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:jcid2024@mymail.pomona.edu">jcid2024@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Jonathan is studying psychology at Pomona College. He conducts computational chemistry research in Dr. Roberto Garza&#39;s lab, where he has evaluated novel corticosteroid candidates for Duchenne muscular dystrophy through virtual screening and molecular modeling of the glucocorticoid receptor.  His current research focuses on identifying small-molecule inhibitors of <i>Streptococcus mutans</i> glucansucrases for their potential use in preventing dental caries. Outside the lab, Jonathan competes on the Pomona-Pitzer Men&#39;s Swim and Dive team.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Brasen.jpg" alt="Bra&#39;sen Phillips-Bates" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Bra'sen Phillips-Bates</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '28</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/Brasen.jpg" alt="Bra&#39;sen Phillips-Bates" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Bra'sen Phillips-Bates</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '28</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:bcpd2024@mymail.pomona.edu">bcpd2024@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Bra&#39;sen is a junior at Pomona College majoring in Chemistry. His current project focuses on identifying novel, AAK1-selective small-molecule inhibitors as a potential dystrophin-independent therapeutic strategy for Duchenne Muscular Dystrophy (DMD).</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Noah.jpeg" alt="Noah Baoerjin" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Noah Baoerjin</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/Noah.jpeg" alt="Noah Baoerjin" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Noah Baoerjin</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:nsbj2025@mymail.pomona.edu">nsbj2025@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Noah matriculated to Pomona College in 2025 and is currently pursuing a B.A. in Chemistry with a minor in Music. He joined Dr. Garza&#39;s research group early in his first semester at Pomona College and expanded a previous PAYS research project that studied cycloguanil-resistant <i>Plasmodium falciparum</i> DHFR. He has presented this research as well as other projects at several national conferences and symposiums. Currently, Noah is wrapping up a SURP project researching chemotherapeutics and cardiotoxicity mechanisms.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Yonten.jpeg" alt="Yonten Gyatso" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Yonten Gyatso</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/Yonten.jpeg" alt="Yonten Gyatso" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Yonten Gyatso</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:ygap2025@mymail.pomona.edu">ygap2025@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Yonten is studying neuroscience at Pomona College. In Dr. Roberto Garza&#39;s lab, he has studied 3D QSAR analysis of small-molecule inhibitors targeting the DMD-affected human GR protein. He is currently exploring free energy perturbation (FEP) methods to optimize inhibitors of HIV-1 protease identified through structural screening.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/Ben.jpg" alt="Benjamin Roh" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Benjamin Roh</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/Ben.jpg" alt="Benjamin Roh" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Benjamin Roh</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:brwh2025@mymail.pomona.edu">brwh2025@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Currently a sophomore at Pomona College. Proficient in QSAR, Schr&ouml;dinger Maestro, and exploring Gaussian. Studied Duchenne Muscular Dystrophy (DMD) and now has a focus on inhibiting <i>Coccidioides immitis</i> fungal proteins and exploring their binding mechanisms. Attended and presented research on DMD at American Chemical Society (ACS) Spring 2026 in Atlanta, GA, Selective Inhibition of <i>C. immitis</i> Chitinase-1 at the 8th International Coccidioidomycosis Study Group Symposium in Davis, CA, S-Nitrosylation Mechanism at ACS Fall 2026 in Chicago, IL. Currently working on exploring the binding mechanism of <i>C. immitis</i> CYP51. Future interest in intrinsically disordered proteins. Unrelated to research, hobbies are film-watching, music, soccer, and fishing.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/justintopol_orig.jpeg" alt="Justin Topol" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Justin Topol</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/justintopol_orig.jpeg" alt="Justin Topol" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Justin Topol</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:jste2025@mymail.pomona.edu">jste2025@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Conducting research in computational chemistry focused on identifying potential therapeutic inhibitors for disease-related molecular targets. His work includes investigating inhibitors of the BRAF V600E mutation associated with melanoma, as well as an independent project exploring inhibition of bacterial glucosyltransferase as a potential strategy for developing alternatives to fluoride in the prevention of dental caries. These projects focus on understanding protein–ligand interactions, enzyme inhibition, and the molecular basis of potential therapeutic and preventive compounds.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/nathanxu.jpeg" alt="Nathan Xu" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Nathan Xu</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/published/nathanxu.jpeg" alt="Nathan Xu" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Nathan Xu</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:nxin2025@mymail.pomona.edu">nxin2025@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Research description to come.</p>
-      </div>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px 40px;align-items:start">
-      <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5;max-width:320px"><img src="uploads/opt/AZ.jpeg" alt="Andrew Zheng" style="width:100%;height:100%;object-fit:cover"></div>
-      <div style="max-width:560px">
-        <h3 style="font-size:clamp(21px,2vw,26px);font-weight:500;line-height:1.15;letter-spacing:-.02em;margin:0 0 6px">Andrew Zheng</h3>
-        <div style="font-size:16px;color:#000;margin-bottom:14px">Research Assistant, Class of '29</div>
-        <div style="display:flex;gap:18px;flex-wrap:wrap;font-size:15px;margin-bottom:22px">
+      </article>
+      <article>
+        <div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm);aspect-ratio:4/5"><img src="uploads/opt/AZ.jpeg" alt="Andrew Zheng" style="width:100%;height:100%;object-fit:cover"></div>
+        <h3 style="font-size:21px;font-weight:500;line-height:1.2;letter-spacing:-.01em;margin:20px 0 4px">Andrew Zheng</h3>
+        <div style="font-size:15px;color:#000;margin-bottom:10px">Research Assistant, Class of '29</div>
+        <div style="display:flex;gap:6px 16px;flex-wrap:wrap;font-size:14px;margin-bottom:14px">
           <a href="mailto:ahzn2025@mymail.pomona.edu">ahzn2025@mymail.pomona.edu</a>
         </div>
         <p style="margin:0;color:#000;text-wrap:pretty">Andrew Zheng is a Computer Science major in the Class of 2029 at Pomona College. He joined the Garza-L&oacute;pez lab during his first semester at Pomona, where his research focuses on Duchenne muscular dystrophy (DMD) and graphene-based systems. Andrew presented his work at the American Chemical Society (ACS) Spring 2026 national conference and will be presenting at both SACNAS 2026 and EMGN 2026. He is broadly interested in computational chemistry and biotechnology.</p>
-      </div>
-    </div>
+      </article>
     </div>
   </section>
 
-  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
 
   <section style="padding:56px 0 64px">
     <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 32px">PAYS Alumni</h2>
     <figure style="margin:0;max-width:900px"><div style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/garzapays_orig.jpeg" alt="PAYS alumni with Dr. Garza-López" style="width:100%;aspect-ratio:16/9;object-fit:cover"></div><figcaption style="font-size:14px;color:#000;margin-top:12px">Left to right: Vivian Phan '24, Berlyn Sanchez '24, Roberto Garza-Lopez, Ashley Vicente '24, Aracely Saldivar '24</figcaption></figure>
   </section>
 
-  <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
   <section style="padding:56px 0 96px">
     <h2 style="font-size:clamp(24px,2.6vw,34px);font-weight:500;letter-spacing:-.02em;margin:0 0 28px">Alumni</h2>
     <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px 28px">
       <sc-for list="{{ alumni }}" as="al" hint-placeholder-count="15">
-        <a href="{{ al.url }}" target="_blank" style="font-size:15px;padding:8px 0;color:var(--color-text);text-decoration:none;background:linear-gradient(to right,transparent,color-mix(in srgb, var(--color-text) 8%, transparent) 24px,color-mix(in srgb, var(--color-text) 8%, transparent) calc(100% - 24px),transparent) no-repeat bottom / 100% 1px" style-hover="text-decoration:underline">{{ al.name }}</a>
+        <a href="{{ al.url }}" target="_blank" style="font-size:15px;padding:8px 0;color:var(--color-text);text-decoration:none" style-hover="text-decoration:underline">{{ al.name }}</a>
       </sc-for>
     </div>
   </section>
