@@ -53,6 +53,26 @@ and `e6-hero-poster.webp`. The defaults keep each video under ~3 MB (WebM
 argument of `encode.sh` (VP9 CRF) or lower the 5th (HEVC color bitrate, kbps)
 or 6th (HEVC alpha quality, 0–1).
 
+## Research page: Aβ42 cartoon loop
+
+`render_cartoon.py` makes the hotpink Aβ42 movie on the Research page
+(`uploads/research/`). It shows the simplified DSSP (H/E/C, MDTraj) of every
+frame as cartoon helices/strands, so transient structure appears exactly where
+and when it occurs. The stretch plays forward then backward (ping-pong) with
+eased turns, because a disordered chain's start and end never match.
+
+Current loop: `AB42_bAIes_full_protein.xtc` frames 27441–27560 (replica 42,
+frames 94–213, 12 ns), the 12 ns stretch with the most helix/strand frames.
+
+```bash
+ARGS="--top AB42_bAIes_full_protein.pdb --traj AB42_bAIes_full_protein.xtc --first 27441 --count 120"
+for k in 0 1 2 3; do
+  $PYMOL_PY tools/md-hero/render_cartoon.py $ARGS --out /tmp/md-hero/ab42 --part $k --parts 4 &
+done; wait
+$PYMOL_PY tools/md-hero/render_cartoon.py --out /tmp/md-hero/ab42 --mirror   # return pass
+NAME=ab42-baies tools/md-hero/encode.sh /tmp/md-hero/ab42 uploads/research 30 36 450 0.6
+```
+
 ## Tests
 
 ```bash

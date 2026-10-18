@@ -89,7 +89,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       </div>
     </div>
     <div class="md-hero-media">
-      <video data-md-hero role="img" poster="uploads/hero/e6-hero-poster.webp" aria-label="Molecular dynamics simulation of the HPV-16 E6 oncoprotein"></video>
+      <video data-md="uploads/hero/e6-hero" role="img" poster="uploads/hero/e6-hero-poster.webp" aria-label="Molecular dynamics simulation of the HPV-16 E6 oncoprotein"></video>
     </div>
   </section>
 
@@ -154,7 +154,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Liam Kwak, Roberto A Garza-López, "Conformational Dynamics and Disorder of HPV-16 E6", Preprint: ChemRxiv, <a href="https://doi.org/10.26434/chemrxiv-2025-hvzp" target="_blank">10.26434/chemrxiv-2025-hvzp</a>.</p>
       </div>
-      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Figure 5.jpg" alt="Free energy surface of HPV-16 E6 with representative conformations" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">Free energy surface of apo-16E6 conformations sampled by WT-MetaD simulations.</figcaption></figure>
+      <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><video data-md="uploads/research/ab42-baies" role="img" poster="uploads/research/ab42-baies-poster.webp" aria-label="Molecular dynamics of the amyloid-beta 42 peptide, showing brief helical turns forming and dissolving" style="display:block;width:100%;aspect-ratio:1/1"></video></div></figure>
     </div>
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start">
@@ -516,25 +516,30 @@ class Component extends DCLogic {
     this._onHash = () => { const h = location.hash.slice(1); if (PAGES.includes(h)) this.setState({ page: h }); };
     window.addEventListener('hashchange', this._onHash);
     this._bindAnim();
-    this._bindHeroVideo();
+    this._bindLoops();
   }
   componentWillUnmount() { window.removeEventListener('hashchange', this._onHash); if (this._io) this._io.disconnect(); }
-  componentDidUpdate() { this._bindAnim(); this._bindHeroVideo(); }
-  // Home hero: E6 trajectory loop with a transparent background. WebKit (Safari and
-  // every iPhone/iPad browser) only shows video alpha in HEVC; everyone else gets the
-  // VP9 WebM. React drops the `muted` attribute, so playback flags are set here.
-  _bindHeroVideo() {
+  componentDidUpdate() { this._bindAnim(); this._bindLoops(); }
+  // MD movie loops (<video data-md="path/name">) with transparent backgrounds. WebKit
+  // (Safari and every iPhone/iPad browser) only shows video alpha in HEVC (name.mov);
+  // everyone else gets VP9 (name.webm). React drops the `muted` attribute, so playback
+  // flags are set here. Reduced motion keeps the poster.
+  _bindLoops() {
     const main = this._main && this._main.current;
-    const v = main && main.querySelector('video[data-md-hero]');
-    if (!v || v.dataset.bound) return;
-    v.dataset.bound = '1';
-    v.muted = v.defaultMuted = true;
-    v.loop = true;
-    v.playsInline = true;
-    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    v.src = /^Apple/.test(navigator.vendor) ? 'uploads/hero/e6-hero.mov' : 'uploads/hero/e6-hero.webm';
-    const p = v.play();
-    if (p && p.catch) p.catch(() => {});
+    if (!main) return;
+    const ext = /^Apple/.test(navigator.vendor) ? '.mov' : '.webm';
+    const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+    main.querySelectorAll('video[data-md]').forEach((v) => {
+      if (v.dataset.bound) return;
+      v.dataset.bound = '1';
+      v.muted = v.defaultMuted = true;
+      v.loop = true;
+      v.playsInline = true;
+      if (still) return;
+      v.src = v.dataset.md + ext;
+      const p = v.play();
+      if (p && p.catch) p.catch(() => {});
+    });
   }
   // Squarespace-style site animation: each block fades in once as it scrolls into view,
   // siblings arriving together stagger slightly.
