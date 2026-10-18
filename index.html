@@ -49,13 +49,6 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
    into the band; the band's text starts just below that. */
 .md-band{padding-top:calc(var(--md-size) * .27 + 48px) !important}
 .md-band-text{max-width:none}
-/* Research intro: NUPR1-ZZW115 docking flipbook in the space beside the paragraphs. */
-.md-intro{display:grid;grid-template-columns:minmax(0,760px) minmax(0,1fr);gap:24px 40px;align-items:center}
-.md-intro-media video{display:block;width:100%;aspect-ratio:1/1}
-@media (max-width:900px){
-  .md-intro{grid-template-columns:1fr}
-  .md-intro-media{justify-self:center;width:100%;max-width:420px}
-}
 @media (max-width:760px){
   :root{--md-size:min(85vw,calc(100vw - 64px));--md-overlap:.36}
   .md-hero{grid-template-columns:1fr;gap:8px}
@@ -142,18 +135,11 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 <!-- ═══ RESEARCH ═══ -->
 <sc-if value="{{ isResearch }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="Research" style="max-width:1200px;margin:0 auto;padding:0 32px">
-  <section style="padding:80px 0 56px">
+  <section style="padding:80px 0 56px;max-width:760px">
     <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0 0 24px">Research</h1>
-    <div class="md-intro">
-    <div>
     <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 20px;text-wrap:pretty">The Garza Lab pursues a fundamental question at the intersection of computational biophysics and structure-based drug design: how are proteins regulated dynamically by ligand binding, post-translational modifications, and their molecular environment, and how can this knowledge be harnessed to develop better therapeutics?</p>
     <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 20px;text-wrap:pretty">We utilize advanced molecular modeling and physics-based simulations to visualize protein motions at atomic resolution that are invisible to traditional experimental methods.</p>
     <p style="font-size:20px;line-height:1.5;color:#000;margin:0;text-wrap:pretty">By combining the rigorous "Garzanian" approach to physical chemistry with state-of-the-art computational tools, we seek to accelerate the development of life-saving treatments for diseases on all fronts. We welcome collaborations with researchers interested in macromolecule conformational dynamics and computer-aided drug design.</p>
-    </div>
-    <div class="md-intro-media">
-      <video data-md="uploads/research/nupr1-zzw115" role="img" poster="uploads/research/nupr1-zzw115-poster.webp" aria-label="ZZW115 docked to twenty conformations of the disordered protein NUPR1 (DiffDock-L poses), shown one after another"></video>
-    </div>
-    </div>
   </section>
 
   <div style="height:1px;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent)"></div>
@@ -164,7 +150,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-bottom:56px">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Intrinsically Disordered Proteins</h3>
-        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Intrinsically disordered proteins lack a single fixed structure, instead existing as an ensemble of rapidly interconverting conformations. Because they present no stable binding pocket, they remain largely undruggable by conventional structure-based drug design methods. We use molecular dynamics and enhanced sampling simulations to sample conformations inaccessible to experiment. Recent work in our group has characterized a previously unidentified intrinsically disordered region of the HPV-16E6 oncoprotein.</p>
+        <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Intrinsically disordered proteins lack a single fixed structure, instead existing as an ensemble of rapidly interconverting conformations. Because they present no stable binding pocket, they remain largely undruggable by conventional structure-based drug design methods. We use molecular dynamics and enhanced sampling simulations to sample conformations inaccessible to experiment. Recent work in our group has characterized a previously unidentified intrinsically disordered region of the HPV-16E6 oncoprotein.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Liam Kwak, Roberto A Garza-López, "Conformational Dynamics and Disorder of HPV-16 E6", Preprint: ChemRxiv, <a href="https://doi.org/10.26434/chemrxiv-2025-hvzp" target="_blank">10.26434/chemrxiv-2025-hvzp</a>.</p>
       </div>
@@ -175,7 +161,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="uploads/opt/Fig1a.jpg" alt="LRP1 binding to fibrinogen" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">LRP1 binding to fibrinogen.</figcaption></figure>
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Protein-Protein Interactions</h3>
-        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Protein-protein interactions organize nearly every cellular process, and the interfaces they form are often large, shallow and transient rather than pocket-like, which makes both their mechanism and their inhibition difficult to resolve experimentally. Identifying the specific residue contacts that hold an interface together is a prerequisite for disrupting or stabilizing it with a drug. We use physics-based molecular docking together with MD simulations to obtain time-series interaction data at atomic resolution, working with experimental collaborators to give mechanistic insight into binding. Recent work in our group has resolved the multivalent binding mechanism of the LRP1-fibrinogen interaction alongside QCM-D measurements.</p>
+        <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Protein-protein interactions organize nearly every cellular process, and the interfaces they form are often large, shallow and transient rather than pocket-like, which makes both their mechanism and their inhibition difficult to resolve experimentally. Identifying the specific residue contacts that hold an interface together is a prerequisite for disrupting or stabilizing it with a drug. We use physics-based molecular docking together with MD simulations to obtain time-series interaction data at atomic resolution, working with experimental collaborators to give mechanistic insight into binding. Recent work in our group has resolved the multivalent binding mechanism of the LRP1-fibrinogen interaction alongside QCM-D measurements.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Liam Kwak, Kevin Ye, Ananya Vinay, Gabby Lewis, Alyssa Yao, Daniel L Gao, Roberto A Garza-López, Malkiat S Johal, "Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction Revealed by QCM-D and Molecular Dynamics", <em>Biophys. J.</em> <strong>125</strong>, 1059-1069, <a href="https://doi.org/10.1016/j.bpj.2026.01.008" target="_blank">10.1016/j.bpj.2026.01.008</a>.</p>
       </div>
@@ -184,7 +170,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Enzyme Catalysis</h3>
-        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Enzymes accelerate reactions by many orders of magnitude, and that catalytic power rests on precise arrangements of active-site residues, cofactors and metal centers that reorganize as substrate binds. Resolving how those contacts form, and how a small molecule can compete with them, is the basis for designing selective inhibitors. We combine induced-fit docking which allows the active site to relax around a candidate ligand, with QM/MM simulations to characterize binding modes and their energetics. Recent work in our group has resolved a Cu(II) dependent binding mechanism of flavonoids to human tyrosinase using induced-fit docking and QCM-D.</p>
+        <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Enzymes accelerate reactions by many orders of magnitude, and that catalytic power rests on precise arrangements of active-site residues, cofactors and metal centers that reorganize as substrate binds. Resolving how those contacts form, and how a small molecule can compete with them, is the basis for designing selective inhibitors. We combine induced-fit docking which allows the active site to relax around a candidate ligand, with QM/MM simulations to characterize binding modes and their energetics. Recent work in our group has resolved a Cu(II) dependent binding mechanism of flavonoids to human tyrosinase using induced-fit docking and QCM-D.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Reference to come.</p>
       </div>
@@ -194,7 +180,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Protein Allostery</h3>
-        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Allosteric sites sit away from a protein’s primary binding pocket, yet ligands that occupy them can tune activity rather than switch it off, and because these sites are less conserved they offer selectivity that orthosteric drugs rarely achieve. The effect is kinetic as much as structural: a modulator can reshape how long an orthosteric ligand stays bound. We use unbinding kinetics simulations, which drive ligand release under an applied bias to recover residence times far longer than conventional MD can reach, together with pathway analysis to identify the residues that gate exit. Recent work in our group uncovered the molecular basis of mu-opioid receptor (MOR) allosteric modulators using unbinding kinetics simulations.</p>
+        <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Allosteric sites sit away from a protein’s primary binding pocket, yet ligands that occupy them can tune activity rather than switch it off, and because these sites are less conserved they offer selectivity that orthosteric drugs rarely achieve. The effect is kinetic as much as structural: a modulator can reshape how long an orthosteric ligand stays bound. We use unbinding kinetics simulations, which drive ligand release under an applied bias to recover residence times far longer than conventional MD can reach, together with pathway analysis to identify the residues that gate exit. Recent work in our group uncovered the molecular basis of mu-opioid receptor (MOR) allosteric modulators using unbinding kinetics simulations.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Reference to come.</p>
       </div>
@@ -215,7 +201,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     <div style="display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:48px;align-items:start">
       <div>
         <h3 style="font-size:22px;font-weight:500;line-height:1.2;margin:0 0 14px">Organometallic inhibitors</h3>
-        <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Small-molecule organometallic compounds can serve as potent inhibitors. We assess the viability of organometallic compounds synthesized by collaborators as potential therapeutics. In earlier work, we have shown the viability of copper (II)-chelated small molecules in inhibiting the SARS-CoV-2 main protease.</p>
+        <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Small-molecule organometallic compounds can serve as potent inhibitors. We assess the viability of organometallic compounds synthesized by collaborators as potential therapeutics. In earlier work, we have shown the viability of copper (II)-chelated small molecules in inhibiting the SARS-CoV-2 main protease.</p>
         <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected work</div>
         <p style="font-size:14px;margin:0;color:#000">Roberto A Garza-López, Liam Kwak, Andrew Chung, Gabriel L Ancajas, John J Kozak, Harry B Gray, "Copper(II) Inhibition of the SARS-CoV-2 Main Protease," <em>Nat. Sci.</em> <strong>5</strong>, e70012 (2025), <a href="https://doi.org/10.1002/ntls.70012" target="_blank">10.1002/ntls.70012</a>.</p>
       </div>
@@ -228,7 +214,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
   <section style="padding:56px 0 96px">
     <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 24px">Random walk diffusion models</h2>
     <div style="max-width:760px">
-      <p style="color:#000;margin:0 0 18px;text-wrap:pretty">Diffusion-controlled processes such as electron transfer and exciton trapping on lattice structures are near-Markovian in nature. Modeling these processes as random walks can provide analytic formulas for properties such as mean-first passage time. We have developed random walk models for multi-layered two-dimensional and fractal lattices and applied them to a multitude of physically relevant systems.</p>
+      <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Diffusion-controlled processes such as electron transfer and exciton trapping on lattice structures are near-Markovian in nature. Modeling these processes as random walks can provide analytic formulas for properties such as mean-first passage time. We have developed random walk models for multi-layered two-dimensional and fractal lattices and applied them to a multitude of physically relevant systems.</p>
       <div style="font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#000;margin-bottom:6px">Selected works</div>
       <p style="font-size:14px;margin:0 0 10px;color:#000">Roberto A Garza-López, Lawrence Chen, John J Kozak, "Markovian Model for Photoinduced Charge Separation in Dendritic Molecules," <em>Chem. Phys. Lett.: X</em> <strong>737</strong>, 100009 (2019), <a href="https://doi.org/10.1016/j.cpletx.2019.100009" target="_blank">10.1016/j.cpletx.2019.100009</a>.</p>
       <p style="font-size:14px;margin:0;color:#000">John J Kozak, Roberto A Garza-López, Enrique Abad, "Lattice Statistical Theory of Random Walks on a Fractal-Like Geometry," <em>Phys. Rev. E</em> <strong>89</strong> (2016), <a href="https://doi.org/10.1103/PhysRevE.89.032147" target="_blank">10.1103/PhysRevE.89.032147</a>.</p>
