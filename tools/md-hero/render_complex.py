@@ -86,8 +86,12 @@ def load_segment(args):
             break
     seg = md.join(chunks)[:need]
     top = seg.topology
-    ss = md.compute_dssp(seg[0].atom_slice(top.select('protein')), simplified=True)[0]
-    helix = {r.resSeq for r, c in zip(top.subset(top.select('protein')).residues, ss) if c == 'H'}
+    # amino acids only: MDTraj also counts an unnamed ligand (UNK) as protein
+    peptide = [r for r in top.residues
+               if r.is_protein and {'N', 'CA', 'C'} <= {a.name for a in r.atoms}]
+    ss = md.compute_dssp(seg[0].atom_slice([a.index for r in peptide for a in r.atoms]),
+                         simplified=True)[0]
+    helix = {r.resSeq for r, c in zip(peptide, ss) if c == 'H'}
     core = np.array([a.index for a in top.atoms
                      if a.name == 'CA' and a.residue.is_protein and a.residue.resSeq in helix])
     lig = np.concatenate([top.select('resSeq %s and not element H' % r) for r, _ in args.ligand])

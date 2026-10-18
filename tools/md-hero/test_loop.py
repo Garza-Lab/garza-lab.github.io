@@ -5,7 +5,8 @@ from loop import (align_frames, align_sequential, crossfade, eased_times,
                   flipbook_schedule, gaussian_smooth,
                   interpolate, pick_window, pingpong_order, radial_fade,
                   replica_ranges, restore_helices, rmsd,
-                  seam_blend, superpose, true_runs)
+                  seam_blend, superpose, true_runs,
+                  clear_view, view_basis, zoom_camera, zoom_schedule)
 
 RNG = np.random.default_rng(0)
 
@@ -233,4 +234,52 @@ def test_restore_helices_uses_the_frame_shown_and_skips_coil_frames():
     assert np.allclose(out[0], frames[0]) and np.allclose(out[2], frames[2])
     seg = np.concatenate(residues[1:4])
     assert np.allclose(out[1][seg], frames[1][seg])     # raw[1] shape == frames shape here
+
+
+def test_zoom_schedule_holds_eases_and_loops():
+    s = zoom_schedule(hold_out=10, move=20, hold_in=15)
+    assert len(s) == 10 + 2 * 20 + 15
+    assert np.all(s[:10] == 0) and np.all(s[30:45] == 1)
+    assert np.all((s >= 0) & (s <= 1))
+    assert np.all(np.diff(s[9:31]) > 0) and np.all(np.diff(s[44:]) < 0)
+    assert abs(s[-1] - s[0]) < 0.02                      # leads smoothly back to the start
+
+
+def test_zoom_camera_goes_from_wide_to_close_steadily():
+    wide, close = (np.array([0.0, 0.0]), 30.0), (np.array([6.0, -3.0]), 8.0)
+    c, h, w = zoom_camera(wide, close, 0.0)
+    assert np.allclose(c, [0, 0]) and np.isclose(h, 30) and np.isclose(w, 0)
+    c, h, w = zoom_camera(wide, close, 1.0)
+    assert np.allclose(c, [6, -3]) and np.isclose(h, 8) and np.isclose(w, 1)
+    steps = [zoom_camera(wide, close, s) for s in np.linspace(0, 1, 11)]
+    assert np.all(np.diff([h for _, h, _ in steps]) < 0)
+    # the close-up's center glides into the middle of the picture without overshooting
+    off = [np.linalg.norm(close[0] - c) / h for c, h, _ in steps]
+    assert np.all(np.diff(off) < 1e-12)
+
+
+def test_clear_view_looks_through_the_opening():
+    d = RNG.normal(size=(4000, 3))
+    d /= np.linalg.norm(d, axis=1)[:, None]
+    shell = 12 * d[d[:, 0] < 0.8]                        # closed except around +x
+    assert clear_view(shell, np.zeros(3), radius=4.0)[0] > 0.9
+
+
+def test_view_basis_levels_the_pair_and_puts_the_point_above():
+    d = np.array([0.0, 0.0, 1.0])
+    along, up = np.array([1.0, 0.2, 0.5]), np.array([0.0, -5.0, 0.0])
+    r = view_basis(d, along, up)
+    assert np.allclose(r @ r.T, np.eye(3)) and np.isclose(np.linalg.det(r), 1)
+    assert np.allclose(r[2], d)
+    flat = along - along @ d * d
+    assert np.isclose(abs(r[0] @ flat) / np.linalg.norm(flat), 1)   # pair lies horizontal
+    assert up @ r[1] > 0                                            # point is above
+
+
+def test_clear_view_can_keep_an_axis_across_the_picture():
+    d = RNG.normal(size=(4000, 3))
+    d /= np.linalg.norm(d, axis=1)[:, None]
+    shell = 12 * d[d[:, 0] < 0.8]
+    v = clear_view(shell, np.zeros(3), radius=4.0, across=[1.0, 0, 0], max_cos=0.5)
+    assert abs(v[0]) <= 0.5 + 1e-9
 
