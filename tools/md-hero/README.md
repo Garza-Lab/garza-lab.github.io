@@ -195,6 +195,30 @@ motion: at 900 px and CRF 48 this loop's WebM was 5.8 MB. 800 px with CRF 54
 brings it to 3.7 MB (.mov 2.2 MB) and still looks clean at the ~550 px it is
 shown.
 
+## Research page: ten ligands docked to HPV-16 E6
+
+`render_poses.py` makes the movie beside Computer-Aided Drug Design
+(`uploads/research/e6-ligands.*`) from `4XR8_Ligand1.maegz` …
+`4XR8_Ligand10.maegz`. Each file is one docked complex: HPV-16 E6 (from PDB
+4XR8, chain H) with its two Zn ions and one ligand. The receptor is the same
+rigid structure in every file, but files 2, 3, 6, 8 and 9 sit in a different
+coordinate frame, so every complex is superposed on the first receptor (Cα)
+before the ligands are placed. Water is removed and the ions are not shown.
+
+E6 is an opaque white surface (`IDP_style()` with `transparency 0` and
+`surface_quality 1`); each ligand is drawn as thick (0.45 Å) brightorange
+sticks in one color, without element colors. The camera looks straight into
+the pocket the ten ligands share, with the pocket in the middle and the whole
+protein in frame, so nothing is cut at the edge and the background stays fully
+transparent. Each pose is held for 2 s and dissolves into the next over 1.5 s;
+the 35 s loop returns to the first.
+
+```bash
+$PYMOL_PY tools/md-hero/render_poses.py --style ~/.pymol/startup/IDP_style.py \
+    --out /tmp/md-hero/e6-ligands 4XR8_Ligand{1,2,3,4,5,6,7,8,9,10}.maegz
+NAME=e6-ligands tools/md-hero/encode.sh /tmp/md-hero/e6-ligands uploads/research 30 40 450 0.5
+```
+
 ## Tests
 
 ```bash
