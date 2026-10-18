@@ -75,8 +75,8 @@ NAME=ab42-baies tools/md-hero/encode.sh /tmp/md-hero/ab42 uploads/research 30 36
 
 ## Research page: NUPR1–ZZW115 docking flipbook
 
-`render_flipbook.py` makes the movie beside the Research intro
-(`uploads/research/nupr1-zzw115.*`). `NUPR1_ZZW115_all_20000_frames.xtc` holds
+`render_flipbook.py` made a flipbook that briefly sat beside the Research intro
+(since taken down, with its files). `NUPR1_ZZW115_all_20000_frames.xtc` holds
 independent DiffDock-L complexes, not a trajectory, so nothing is animated: the
 script takes the highest-confidence complex of each of the 20 clusters, aligns
 them on ZZW115 (the ligand stays put), renders each as a still with the lab's
@@ -94,6 +94,51 @@ $PYMOL_PY tools/md-hero/render_flipbook.py --top $D/NUPR1_ZZW115_all_20000_frame
     --style ~/.pymol/startup/IDP_style.py --out /tmp/md-hero/nupr1
 NAME=nupr1-zzw115 tools/md-hero/encode.sh /tmp/md-hero/nupr1 uploads/research 30 36 450 0.6
 ```
+
+## Research page: mu-opioid receptor with naloxone and 368
+
+`render_complex.py` makes the movie beside Protein Allostery
+(`uploads/research/mor-naloxone-368.*`): the mu-opioid receptor (from PDB 9BJK)
+as a white cartoon, with naloxone (lime) in the orthosteric pocket and the
+negative allosteric modulator 368 (hotpink) above it, in the lab's
+`IDP_style()`; only the ligand sticks are thickened (0.45 Å) so they read at
+web size. The loop is built like the homepage's: within one continuous
+replica, among the windows whose first and last frames match best, the one in
+which the ligands move furthest from their usual pose and come back, aligned
+on the helices, smoothed, with a blended seam. The camera looks along the
+membrane, extracellular side up, raised 15°.
+
+Current loop: replica 3 of `9BJK_NAM_merged_protein_ligands.xtc` (protein and
+ligands only), every 8th frame of the 1 ns copy from 10585 to 13937 — 3.35 µs
+of simulation per 12 s loop.
+
+On the cluster, first keep every 10th frame (1 ns apart). In the result the
+three replicas are frames [0, 5001), [5001, 10001) and [10001, 15001).
+
+```bash
+printf "System\n" | gmx trjconv -f 9BJK_NAM_merged_protein_ligands.xtc \
+    -s 9BJK_NAM_merged_protein_ligands.gro -n 9BJK_NAM_merged_protein_ligands.ndx \
+    -skip 10 -o 9BJK_NAM_protein_ligands_every10.xtc
+```
+
+Then, with that file and `9BJK_NAM_merged_protein_ligands.pdb` copied here:
+
+```bash
+ARGS="--top 9BJK_NAM_merged_protein_ligands.pdb --traj 9BJK_NAM_protein_ligands_every10.xtc
+      --segment 10001 15001 --stride 8 --sigma 5 --style ~/.pymol/startup/IDP_style.py
+      --ligand 501 lime --ligand 502 hotpink --ligand-radius 0.45
+      --azimuth 15 --tilt 15 --size 900"
+for k in 0 1 2 3; do
+  $PYMOL_PY tools/md-hero/render_complex.py $ARGS --out /tmp/md-hero/mor --part $k --parts 4 &
+done; wait
+NAME=mor-naloxone-368 tools/md-hero/encode.sh /tmp/md-hero/mor uploads/research 30 48 450 0.5
+```
+
+Thin outlines moving every frame compress poorly: at 1080 px and CRF 36 the WebM
+was 7.5 MB. 900 px with CRF 48 keeps it near 3 MB (.mov 2.3 MB) and still looks
+clean at the ~550 px it is shown.
+
+Add `--size 480 --every 2 --draft` (and a 15 fps encode) for a quick preview.
 
 ## Tests
 
