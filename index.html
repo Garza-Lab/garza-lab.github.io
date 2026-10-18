@@ -61,6 +61,9 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 }
 /* Organometallic inhibitors stacks where the other research areas do (two 300 px columns + 48 px gap no longer fit) */
 @media (max-width:711px){.om-grid{grid-template-columns:1fr !important}}
+/* News rows: date, image, then text; on phones the date sits above image + text. */
+.news-row{display:grid;grid-template-columns:minmax(110px,150px) 160px minmax(0,1fr);gap:24px;align-items:start}
+@media (max-width:600px){.news-row{grid-template-columns:110px minmax(0,1fr);gap:12px 16px}.news-date{grid-column:1 / -1}}
 </style>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
 </helmet>
@@ -431,10 +434,11 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0">News</h1>
   </section>
   <section style="padding-bottom:96px;max-width:860px">
-    <sc-for list="{{ news }}" as="n" hint-placeholder-count="4">
-      <div style="display:grid;grid-template-columns:minmax(110px,150px) minmax(0,1fr);gap:24px;padding:24px 0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent) no-repeat top / 100% 1px">
-        <div style="font-size:13px;color:#000;padding-top:3px">{{ n.date }}</div>
-        <div>
+    <sc-for list="{{ news }}" as="n" hint-placeholder-count="3">
+      <div class="news-row" style="padding:24px 0;background:linear-gradient(to right,transparent,var(--color-divider) 48px,var(--color-divider) calc(100% - 48px),transparent) no-repeat top / 100% 1px">
+        <div class="news-date" style="font-size:13px;color:#000;padding-top:3px">{{ n.date }}</div>
+        <div class="news-img" style="border-radius:var(--radius-md);overflow:hidden;box-shadow:var(--shadow-sm)"><img src="{{ n.img }}" alt="{{ n.alt }}" loading="lazy" style="display:block;width:100%;height:auto"></div>
+        <div class="news-text">
           <div style="font-size:18px;font-weight:500;line-height:1.3;margin-bottom:6px">{{ n.title }}</div>
           <p style="margin:0;color:#000;font-size:14.5px;text-wrap:pretty">{{ n.text }}</p>
         </div>
@@ -489,10 +493,9 @@ const PUBS = [
   {year:2016,title:'Lattice Statistical Theory of Random Walks on a Fractal-Like Geometry',authors:'John J Kozak, Roberto A Garza-López, Enrique Abad',journal:'Phys. Rev. E',ref:'89, 032147',doi:'10.1103/PhysRevE.89.032147',url:'https://doi.org/10.1103/PhysRevE.89.032147'},
 ];
 const NEWS = [
-  {sort:'2026-02',date:'February 2026',title:'Kendall Houk visits as Robbins Lecturer',text:'Dr. Kendall Houk, a founding father of computational organic chemistry, visited Pomona College as the 2026 Robbins Lecturer and dubbed the group the "Garzanians."'},
-  {sort:'2026-01',date:'January 2026',title:'Front cover of Biophysical Journal',text:'"Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction Revealed by QCM-D and Molecular Dynamics" is featured on the cover of Biophysical Journal, vol. 125.'},
-  {sort:'2025-05',date:'May 2025',title:'Front cover of Natural Sciences',text:'"Copper(II) Inhibition of the SARS-CoV-2 Main Protease," with Harry B. Gray and John J. Kozak, appears on the cover of Natural Sciences.'},
-  {sort:'2025-10',date:'October 2025',title:'HPV-16 E6 preprint on ChemRxiv',text:'Liam Kwak and Dr. Garza-López post "Conformational Dynamics and Disorder of HPV-16 E6," characterizing open and closed conformations of the apo oncoprotein.'},
+  {sort:'2026-02',date:'February 2026',title:'Kendall Houk visits as Robbins Lecturer',text:'Dr. Kendall Houk, a founding father of computational organic chemistry, visited Pomona College as the 2026 Robbins Lecturer and dubbed the group the "Garzanians."',img:U+'garzalabphotowithhouk_orig.jpeg',alt:'Garza Lab with Dr. Kendall Houk'},
+  {sort:'2026-01',date:'January 2026',title:'Front cover of Biophysical Journal',text:'"Multivalent Binding Mechanism of LRP1-Fibrinogen Interaction Revealed by QCM-D and Molecular Dynamics" is featured on the cover of Biophysical Journal, vol. 125.',img:U+'published/biophysical-fibrinogen.jpg',alt:'Biophysical Journal cover'},
+  {sort:'2025-05',date:'May 2025',title:'Front cover of Natural Sciences',text:'"Copper(II) Inhibition of the SARS-CoV-2 Main Protease," with Harry B. Gray and John J. Kozak, appears on the cover of Natural Sciences.',img:U+'published/nat-sci-covid.jpg',alt:'Natural Sciences cover'},
 ];
 const MEMBERS = [
   ['Ian Tam',27],['Andrew Chung',28],['Jonathan Cong',28],["Bra'sen Phillips-Bates",28],['Noah Baoerjin',29],['Yonten Gyatso',29],['Benjamin Roh',29],
