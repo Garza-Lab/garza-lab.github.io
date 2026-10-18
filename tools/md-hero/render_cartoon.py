@@ -4,20 +4,22 @@ secondary structure of every frame (MDTraj DSSP, simplified H/E/C).
 Run with PyMOL's bundled Python (it provides pymol, numpy and mdtraj), e.g.
 
   /Applications/PyMOL.app/Contents/bin/python tools/md-hero/render_cartoon.py \
-      --top AB42_bAIes_full_protein.pdb --traj AB42_bAIes_full_protein.xtc \
-      --first 27441 --count 120 --out /tmp/md-hero/ab42
+      --top NUPR1_bAIes_all_120000_frames.pdb --traj NUPR1_bAIes_all_120000_frames.xtc \
+      --first 70725 --count 60 --sigma 2 --color cyan \
+      --style ~/.pymol/startup/IDP_style.py --out /tmp/md-hero/nupr1
   /Applications/PyMOL.app/Contents/bin/python tools/md-hero/render_cartoon.py \
-      --out /tmp/md-hero/ab42 --mirror
+      --out /tmp/md-hero/nupr1 --mirror
 
 The stretch plays forward, then backward (ping-pong), easing at each turn, so the
 loop is seamless without blending unrelated conformations. Secondary structure is
-assigned on the raw frames and shown only where it occurs; coordinates are lightly
-smoothed for display. Run once more with --mirror (after all workers finish) to add
-the return pass as hard links.
+assigned on the raw frames and shown only where it occurs; coordinates are smoothed
+for display, but each helix keeps the shape it has in its own raw frame. Run once
+more with --mirror (after all workers finish) to add the return pass as hard links.
 """
 import argparse
 import json
 import os
+import runpy
 import sys
 import time
 
@@ -27,7 +29,7 @@ from pymol import cmd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from loop import (align_sequential, eased_times, gaussian_smooth,  # noqa: E402
-                  interpolate, pingpong_order)
+                  interpolate, pingpong_order, restore_helices)
 
 TO_PYMOL_SS = {'H': 'H', 'E': 'S', 'C': 'L'}   # MDTraj simplified DSSP -> PyMOL
 
@@ -43,6 +45,7 @@ def parse_args():
     p.add_argument('--ease', type=int, default=30, help='easing frames at each turn')
     p.add_argument('--sigma', type=float, default=1.0, help='display smoothing, source frames')
     p.add_argument('--color', default='hotpink', help='PyMOL color name')
+    p.add_argument('--style', help="script defining IDP_style() (default: the homepage's matte look)")
     p.add_argument('--size', type=int, default=1000, help='square image size, px')
     p.add_argument('--draft', action='store_true', help='fast preview quality')
     p.add_argument('--only', type=int, nargs='+', help='render just these output frames')
@@ -54,22 +57,36 @@ def parse_args():
 
 
 def load_window(args):
-    """Coordinates (Å), simplified DSSP per frame, residue numbers, CA indices."""
-    full = md.load(args.traj, top=args.top)
-    win = full[args.first:args.first + args.count]
-    if win.n_frames != args.count:
-        raise SystemExit('trajectory has only %d frames' % full.n_frames)
+    """Coordinates (Å), simplified DSSP per frame, residue numbers, CA indices, the
+    trajectory's first frame (to check atom order), and per residue its atoms and
+    backbone atoms. Reads only the frames needed."""
+    chunks, have = [], 0
+    for chunk in md.iterload(args.traj, top=args.top, chunk=500, skip=args.first):
+        chunks.append(chunk)
+        have += len(chunk)
+        if have >= args.count:
+            break
+    if have < args.count:
+        raise SystemExit('trajectory ends before frame %d' % (args.first + args.count - 1))
+    win = md.join(chunks)[:args.count]
     ss = md.compute_dssp(win, simplified=True)
     resseq = [r.resSeq for r in win.topology.residues]
     ca = win.topology.select('name CA')
-    return win.xyz * 10.0, ss, resseq, ca, full.xyz[0] * 10.0
+    first = md.load_frame(args.traj, 0, top=args.top)
+    residues = [np.array([a.index for a in r.atoms]) for r in win.topology.residues]
+    backbone = [np.array([a.index for a in r.atoms if a.name in ('N', 'CA', 'C', 'O')])
+                for r in win.topology.residues]
+    return win.xyz * 10.0, ss, resseq, ca, first.xyz[0] * 10.0, residues, backbone
 
 
-def build_pass(args, xyz, ca):
+def build_pass(args, xyz, ca, ss, residues, backbone):
     """Display coordinates for one forward pass, and the source frame of each."""
-    xyz = gaussian_smooth(align_sequential(xyz, ca), args.sigma)
+    raw = align_sequential(xyz, ca)
     times = eased_times(args.count, args.half, args.ease)
-    return interpolate(xyz, times), np.rint(times).astype(int)
+    src = np.rint(times).astype(int)
+    frames = interpolate(gaussian_smooth(raw, args.sigma), times)
+    # Smoothing crumples a helix that lasts a frame or two: show it in its raw shape.
+    return restore_helices(frames, raw, src, ss == 'H', residues, backbone), src
 
 
 def apply_style(draft):
@@ -90,6 +107,33 @@ def apply_style(draft):
         cmd.set(name, value)
 
 
+def apply_idp_style(path, draft):
+    """The lab's IDP_style() look (outlined illustration cartoon)."""
+    runpy.run_path(os.path.expanduser(path))['IDP_style']()
+    # IDP_style's chunky disordered-chain tube (its full=1 settings) keeps the
+    # mostly-loop chain readable at web size; the rest of the look is the default.
+    cmd.set('cartoon_loop_radius', 0.9)
+    cmd.set('cartoon_sampling', 14)
+    if draft:
+        cmd.set('antialias', 1)
+
+
+def fit_view(frames, margin=3.0):
+    """Keep the camera's rotation; center and zoom it so every frame fits the square
+    picture with `margin` Å to spare (tighter than cmd.zoom's bounding sphere)."""
+    view = list(cmd.get_view())
+    rot = np.array(view[:9]).reshape(3, 3)          # model -> camera (column-major)
+    cam = frames.reshape(-1, 3) @ rot
+    lo, hi = cam.min(axis=0), cam.max(axis=0)
+    half = max(hi[0] - lo[0], hi[1] - lo[1]) / 2 + margin
+    depth = (hi[2] - lo[2]) / 2 + margin
+    dist = half / np.tan(np.radians(cmd.get_setting_float('field_of_view')) / 2)
+    view[9:12] = [0.0, 0.0, -dist]
+    view[12:15] = [float(v) for v in rot @ ((lo + hi) / 2)]
+    view[15:17] = [dist - depth, dist + depth]
+    cmd.set_view(view)
+
+
 def setup_scene(args, frames, first_frame):
     """Frame the camera on every output frame, then keep one state to render."""
     cmd.set('retain_order', 1)     # keep file atom order so coordinates line up
@@ -101,17 +145,20 @@ def setup_scene(args, frames, first_frame):
     cmd.create('frames', 'mol', 1, 1)
     for i, xyz in enumerate(frames, start=1):
         cmd.load_coordset(xyz, 'frames', state=i)
-    cmd.orient('frames and name CA', state=1)
-    cmd.zoom('frames', 2.0, state=0, complete=1)   # state=0 fits all states
+    cmd.orient('frames and name CA', state=0)       # principal axes of every frame
+    fit_view(frames)
     view = cmd.get_view()
     cmd.create('peptide', 'frames', 1, 1)
     cmd.delete('frames')
     cmd.delete('mol')
     cmd.hide('everything')
     cmd.show('cartoon', 'peptide')
-    cmd.color(args.color, 'peptide')
     cmd.dss('peptide')   # PyMOL ignores ss set by alter until dss has run once
-    apply_style(args.draft)
+    if args.style:
+        apply_idp_style(args.style, args.draft)
+    else:
+        apply_style(args.draft)
+    cmd.color(args.color, 'peptide')
     cmd.set_view(view)
 
 
@@ -148,8 +195,8 @@ def main():
         mirror(args.out, args.half)
         return
     cmd.feedback('disable', 'all', 'everything')
-    xyz, ss, resseq, ca, first_frame = load_window(args)
-    frames, src = build_pass(args, xyz, ca)
+    xyz, ss, resseq, ca, first_frame, residues, backbone = load_window(args)
+    frames, src = build_pass(args, xyz, ca, ss, residues, backbone)
     setup_scene(args, frames, first_frame)
     if args.part == 0 and not args.only:
         os.makedirs(args.out, exist_ok=True)
