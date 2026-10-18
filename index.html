@@ -135,15 +135,15 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 <!-- ═══ RESEARCH ═══ -->
 <sc-if value="{{ isResearch }}" hint-placeholder-val="{{ false }}">
 <div data-screen-label="Research" style="max-width:1200px;margin:0 auto;padding:0 32px">
-  <section style="padding:80px 0 56px;max-width:760px">
+  <section style="padding:80px 0 0;max-width:760px">
     <h1 style="font-size:clamp(48px,9vw,116px);font-weight:500;line-height:.95;letter-spacing:-.035em;margin:0 0 24px">Research</h1>
     <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 20px;text-wrap:pretty">The Garza Lab pursues a fundamental question at the intersection of computational biophysics and structure-based drug design: how are proteins regulated dynamically by ligand binding, post-translational modifications, and their molecular environment, and how can this knowledge be harnessed to develop better therapeutics?</p>
     <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 20px;text-wrap:pretty">We utilize advanced molecular modeling and physics-based simulations to visualize protein motions at atomic resolution that are invisible to traditional experimental methods.</p>
     <p style="font-size:20px;line-height:1.5;color:#000;margin:0;text-wrap:pretty">By combining the rigorous "Garzanian" approach with state-of-the-art computational tools, we seek to accelerate the development of life-saving treatments for diseases on all fronts. We welcome collaborations with researchers interested in atomic‑level characterization of biological processes and drug discovery.</p>
   </section>
 
-  <section style="padding:56px 0">
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-bottom:56px">
+  <section style="padding:80px 0 0">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start">
       <div>
         <h3 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 14px">Intrinsically Disordered Proteins</h3>
         <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Intrinsically disordered proteins lack a single fixed structure, instead existing as an ensemble of rapidly interconverting conformations. Because they present no stable binding pocket, they remain largely undruggable by conventional structure-based drug design methods. We use molecular dynamics and enhanced sampling simulations to sample conformations inaccessible to experiment. Recent work in our group has characterized a previously unidentified intrinsically disordered region of the HPV-16E6 oncoprotein.</p>
@@ -153,7 +153,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       <figure style="margin:0"><video data-md="uploads/research/ab42-baies" role="img" poster="uploads/research/ab42-baies-poster.webp" aria-label="Molecular dynamics of the amyloid-beta 42 peptide, showing brief helical turns forming and dissolving" style="display:block;width:100%;aspect-ratio:1/1"></video></figure>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:80px">
       <figure style="margin:0"><img src="uploads/research/lrp1-fibrinogen.webp" alt="LRP1 binding to fibrinogen" style="display:block;width:100%"></figure>
       <div>
         <h3 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 14px">Protein-Protein Interactions</h3>
@@ -163,7 +163,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       </div>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:80px">
       <div>
         <h3 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 14px">Enzyme Catalysis</h3>
         <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Enzymes accelerate reactions by many orders of magnitude, and that catalytic power rests on precise arrangements of active-site residues, cofactors and metal centers that reorganize as substrate binds. Resolving how those contacts form, and how a small molecule can compete with them, is the basis for designing selective inhibitors. We combine induced-fit docking which allows the active site to relax around a candidate ligand, with QM/MM simulations to characterize binding modes and their energetics. Recent work in our group has resolved a Cu(II) dependent binding mechanism of flavonoids to human tyrosinase using induced-fit docking and QCM-D.</p>
@@ -173,7 +173,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/flavonoid-binding_orig.png" alt="Flavonoid binding" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">Flavonoid binding pose from physics-based docking.</figcaption></figure>
     </div>
 
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:56px">
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:48px;align-items:start;margin-top:80px">
       <div>
         <h3 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 14px">Protein Allostery</h3>
         <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Allosteric sites sit away from a protein’s primary binding pocket, yet ligands that occupy them can tune activity rather than switch it off, and because these sites are less conserved they offer selectivity that orthosteric drugs rarely achieve. The effect is kinetic as much as structural: a modulator can reshape how long an orthosteric ligand stays bound. We use unbinding kinetics simulations, which drive ligand release under an applied bias to recover residence times far longer than conventional MD can reach, together with pathway analysis to identify the residues that gate exit. Recent work in our group uncovered the molecular basis of mu-opioid receptor (MOR) allosteric modulators using unbinding kinetics simulations.</p>
@@ -184,8 +184,8 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     </div>
   </section>
 
-  <section style="padding:56px 0">
-    <div style="max-width:760px;margin-bottom:56px">
+  <section style="padding:80px 0 0">
+    <div style="max-width:760px;margin-bottom:80px">
       <h3 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 14px">Structure-based virtual screening</h3>
       <p style="font-size:20px;line-height:1.5;color:#000;margin:0;text-wrap:pretty"><em>In-silico</em> prediction of drug potency has emerged as a cost-efficient yet effective method during the early stages of drug design. We use computer-aided drug design (CADD) techniques such as physics-based high-throughput virtual screening (HTVS) to filter large databases of molecules for lead compounds and scaffolds. We use MD simulations and free energy calculations of lead compounds to inform future stages of drug development. Furthermore, we employ quantitative structure-activity relationship (QSAR) models to more efficiently process large datasets.</p>
     </div>
@@ -201,7 +201,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
     </div>
   </section>
 
-  <section style="padding:56px 0 96px">
+  <section style="padding:80px 0 96px">
     <h2 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 24px">Random walk diffusion models</h2>
     <div style="max-width:760px">
       <p style="font-size:20px;line-height:1.5;color:#000;margin:0 0 18px;text-wrap:pretty">Diffusion-controlled processes such as electron transfer and exciton trapping on lattice structures are near-Markovian in nature. Modeling these processes as random walks can provide analytic formulas for properties such as mean-first passage time. We have developed random walk models for multi-layered two-dimensional and fractal lattices and applied them to a multitude of physically relevant systems.</p>
