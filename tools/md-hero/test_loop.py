@@ -1,8 +1,10 @@
 import numpy as np
 import pytest
 
-from loop import (align_frames, align_sequential, eased_times, gaussian_smooth,
-                  interpolate, pick_window, pingpong_order, replica_ranges, rmsd,
+from loop import (align_frames, align_sequential, crossfade, eased_times,
+                  flipbook_schedule, gaussian_smooth,
+                  interpolate, pick_window, pingpong_order, radial_fade,
+                  replica_ranges, rmsd,
                   seam_blend, superpose)
 
 RNG = np.random.default_rng(0)
@@ -151,3 +153,34 @@ def test_interpolate_hits_frames_and_midpoints():
     coords = np.arange(3, dtype=float)[:, None, None] * np.ones((1, 2, 3))
     out = interpolate(coords, np.array([0.0, 0.5, 1.0, 2.0]))
     assert np.allclose(out[:, 0, 0], [0.0, 0.5, 1.0, 2.0])
+
+
+def test_flipbook_schedule_holds_then_fades_and_wraps():
+    assert flipbook_schedule(3, 2, 1) == [
+        (0, 0, 0.0), (0, 0, 0.0), (0, 1, 0.5),
+        (1, 1, 0.0), (1, 1, 0.0), (1, 2, 0.5),
+        (2, 2, 0.0), (2, 2, 0.0), (2, 0, 0.5)]
+
+
+def test_crossfade_endpoints_and_opaque_average():
+    red = np.zeros((2, 2, 4), np.uint8); red[..., 0] = 255; red[..., 3] = 255
+    blue = np.zeros((2, 2, 4), np.uint8); blue[..., 2] = 255; blue[..., 3] = 255
+    assert np.array_equal(crossfade(red, blue, 0.0), red)
+    assert np.array_equal(crossfade(red, blue, 1.0), blue)
+    mid = crossfade(red, blue, 0.5)
+    assert tuple(mid[0, 0]) == (128, 0, 128, 255)
+
+
+def test_crossfade_to_transparent_keeps_color_and_halves_alpha():
+    red = np.zeros((2, 2, 4), np.uint8); red[..., 0] = 255; red[..., 3] = 255
+    clear = np.zeros((2, 2, 4), np.uint8)
+    assert tuple(crossfade(red, clear, 0.5)[0, 0]) == (255, 0, 0, 128)
+
+
+def test_radial_fade_keeps_centre_and_clears_corners():
+    img = np.full((100, 100, 4), 255, np.uint8)
+    out = radial_fade(img, 0.8, 0.95)
+    assert out[50, 50, 3] == 255                     # centre untouched
+    assert out[0, 0, 3] == 0                         # corners gone
+    assert 0 < out[50, 94, 3] < 255                  # partway through the fade
+    assert np.array_equal(out[..., :3], img[..., :3])   # colour untouched
