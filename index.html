@@ -59,6 +59,8 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
   nav a{font-size:17px !important}
   nav a:first-child{font-size:19px !important}
 }
+/* Organometallic inhibitors stacks where the other research areas do (two 300 px columns + 48 px gap no longer fit) */
+@media (max-width:711px){.om-grid{grid-template-columns:1fr !important}}
 </style>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
 </helmet>
@@ -188,7 +190,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
       <p style="font-size:14px;margin:0;color:#000">Ian Tam, Andrew Chung, Liam Kwak, Roberto A Garza-López, "Structure-Based Virtual Screening for Small-Molecule Inhibitors of HPV-16 E6", Preprint: ChemRxiv (2026), <a href="https://doi.org/10.26434/chemrxiv-2026-64n5z" target="_blank">10.26434/chemrxiv-2026-64n5z</a>.</p>
     </div>
 
-    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;align-items:start">
+    <div class="om-grid" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;align-items:start">
       <figure style="margin:0"><div style="border-radius:var(--radius-md);overflow:hidden;background:var(--color-surface);box-shadow:var(--shadow-sm);padding:16px"><img src="https://garzalab.weebly.com/uploads/1/5/5/1/155162279/editor/cu-schiff.png" alt="Copper(II) Schiff base complex" style="width:100%;border-radius:var(--radius-sm)"></div><figcaption style="font-size:14px;color:#000;margin-top:8px">Copper(II)-chelated Schiff base inhibitor.</figcaption></figure>
       <div>
         <h3 style="font-size:clamp(30px,3.6vw,46px);font-weight:500;line-height:1.08;letter-spacing:-.025em;margin:0 0 14px">Organometallic inhibitors</h3>
