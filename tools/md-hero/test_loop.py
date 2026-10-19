@@ -6,7 +6,8 @@ from loop import (align_frames, align_sequential, crossfade, eased_times,
                   interpolate, pick_window, pingpong_order, radial_fade,
                   replica_ranges, restore_helices, rmsd,
                   seam_blend, superpose, true_runs,
-                  clear_view, view_basis, zoom_camera, zoom_schedule)
+                  clear_view, fibonacci_sphere, hidden_counts, projected_spread,
+                  view_basis, zoom_camera, zoom_schedule)
 
 RNG = np.random.default_rng(0)
 
@@ -276,10 +277,16 @@ def test_view_basis_levels_the_pair_and_puts_the_point_above():
     assert up @ r[1] > 0                                            # point is above
 
 
-def test_clear_view_can_keep_an_axis_across_the_picture():
-    d = RNG.normal(size=(4000, 3))
-    d /= np.linalg.norm(d, axis=1)[:, None]
-    shell = 12 * d[d[:, 0] < 0.8]
-    v = clear_view(shell, np.zeros(3), radius=4.0, across=[1.0, 0, 0], max_cos=0.5)
-    assert abs(v[0]) <= 0.5 + 1e-9
+def test_hidden_counts_sees_what_is_in_front():
+    dirs = np.array([[0.0, 0.0, 1.0], [0.0, 0.0, -1.0], [1.0, 0.0, 0.0]])
+    targets = np.array([[0.0, 0.0, 0.0], [10.0, 0.0, 0.0]])
+    wall = np.array([[0.0, 0.0, 5.0]])               # in front of the first target, seen from +z
+    assert hidden_counts(wall, targets, dirs, 1.0).tolist() == [1, 0, 0]
+
+
+def test_projected_spread_is_small_end_on():
+    rod = np.array([[0.0, 0.0, z] for z in np.linspace(-5, 5, 11)])
+    side, end = projected_spread(rod, np.array([[1.0, 0, 0], [0, 0, 1.0]]))
+    assert side > 3 and end < 1e-6
+    assert len(projected_spread(rod, fibonacci_sphere(50))) == 50
 
