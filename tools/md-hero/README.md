@@ -165,10 +165,13 @@ whole enzyme, zooms into the dicopper active site, holds, and zooms back out. Th
 site shows the two copper ions and the bridging peroxide as spheres in PyMOL's
 element colors, the side chains of the six copper-binding histidines (180, 202,
 211, 363, 367, 390; white carbons, blue nitrogens; taxifolin has cyan carbons and
-red oxygens) and dotted black lines for every metal bond (Cu–N and Cu–O within
+red oxygens; both drawn as thick 0.45 Å sticks, like the ligands in the other
+movies) and dotted black lines for every metal bond (Cu–N and Cu–O within
 2.6 Å in the median frame). Taxifolin's nearest oxygen stays 3.5–4.4 Å
 from CuB in every frame, so it gets no coordination line. The camera looks at
-the site from its most open side that keeps the ligand beside the metals.
+the site from the side where least of it is hidden (site atoms behind the
+cartoon, or the coppers and histidines behind taxifolin) without seeing
+taxifolin edge-on.
 
 Source: the Desmond run `taxifolin_sample-out.cms` + `taxifolin_sample_trj`
 (100 ns, 1,001 frames). Current loop: every 2nd frame from 132 to 970, i.e. 84 ns
@@ -185,7 +188,7 @@ for k in 0 1 2 3; do
   $PYMOL_PY tools/md-hero/render_site.py --top /tmp/md-hero/taxifolin.pdb \
       --traj /tmp/md-hero/taxifolin.xtc --segment 0 1001 --stride 2 --sigma 3 \
       --style ~/.pymol/startup/IDP_style.py --ligand 999 cyan --spheres 'resn CU+PER' \
-      --size 800 --out /tmp/md-hero/tyrosinase --part $k --parts 4 &
+      --stick-radius 0.45 --size 800 --out /tmp/md-hero/tyrosinase --part $k --parts 4 &
 done; wait
 NAME=tyrosinase-taxifolin tools/md-hero/encode.sh /tmp/md-hero/tyrosinase uploads/research 30 54 450 0.4
 ```

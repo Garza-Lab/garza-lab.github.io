@@ -201,21 +201,37 @@ def fibonacci_sphere(n):
     return np.stack([r * np.cos(phi), r * np.sin(phi), z], axis=1)
 
 
-def clear_view(points, target, radius=6.0, n=600, across=None, max_cos=1.0):
+def clear_view(points, target, radius=6.0, n=600):
     """Unit vector toward the viewer along which least is in the way of `target`:
     each point in front of it counts by how near it passes the line of sight
-    (a Gaussian of width `radius`). With `across`, only directions at least
-    arccos(max_cos) away from that axis are considered, so things lying along
-    it stay side by side in the picture."""
+    (a Gaussian of width `radius`)."""
     rel = np.asarray(points, dtype=float) - target
     dirs = fibonacci_sphere(n)
-    if across is not None:
-        axis = np.asarray(across, dtype=float) / np.linalg.norm(across)
-        dirs = dirs[np.abs(dirs @ axis) <= max_cos]
     along = rel @ dirs.T
     perp2 = (rel ** 2).sum(axis=1)[:, None] - along ** 2
     blocked = np.where(along > 0, np.exp(-perp2 / (2 * radius ** 2)), 0.0)
     return dirs[np.argmin(blocked.sum(axis=0))]
+
+
+def hidden_counts(points, targets, dirs, radius):
+    """For each direction (rows of dirs, pointing at the viewer), how many of
+    `targets` have one of `points` in front of them within `radius` of their line
+    of sight."""
+    points = np.asarray(points, dtype=float)
+    counts = np.zeros(len(dirs), dtype=int)
+    for t in np.asarray(targets, dtype=float):
+        rel = points - t
+        along = rel @ dirs.T
+        perp2 = (rel ** 2).sum(axis=1)[:, None] - along ** 2
+        counts += ((along > 0) & (perp2 < radius ** 2)).any(axis=0)
+    return counts
+
+
+def projected_spread(points, dirs):
+    """For each direction, the radius of gyration of `points` seen along it
+    (small when an extended or flat molecule is seen end-on or edge-on)."""
+    rel = np.asarray(points, dtype=float) - np.mean(points, axis=0)
+    return np.sqrt(((rel ** 2).sum(axis=1)[:, None] - (rel @ dirs.T) ** 2).mean(axis=0))
 
 
 def view_basis(d, along, up):

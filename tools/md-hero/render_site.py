@@ -14,9 +14,9 @@ ends nearly match, smoothed, with a blended seam. The active site is the ligand,
 the --spheres atoms (metals and what bridges them, colored by element) and the side
 chains of the residues that coordinate the metals, shown as sticks. Ligand and
 side-chain carbons take the ligand and protein colors; other atoms PyMOL's element
-colors. The camera looks at the site from its most open side that keeps the ligand
-beside the metals rather than in front of them, with the metals level and the
-ligand above. --clip cuts away what lies in front of the site in the close-up.
+colors. The camera looks at the site from the side where least of it is hidden,
+behind the cartoon or behind the ligand, without seeing the ligand edge-on, with
+the metals level and the ligand above. --clip cuts away what lies in front of the site in the close-up.
 Metal coordination (any metal-to-heavy-atom pair within --contact Å in the median
 frame) is drawn as dotted black lines.
 """
@@ -31,7 +31,8 @@ import numpy as np
 from pymol import cmd
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-from loop import clear_view, view_basis, zoom_camera, zoom_schedule  # noqa: E402
+from loop import (fibonacci_sphere, hidden_counts, projected_spread,  # noqa: E402
+                  view_basis, zoom_camera, zoom_schedule)
 from render_complex import build_loop, load_segment  # noqa: E402
 
 
@@ -54,11 +55,13 @@ def parse_args():
                    help='ligand residue number and its color; repeat per ligand')
     p.add_argument('--spheres', required=True,
                    help='PyMOL selection shown as spheres, colored by element')
+    p.add_argument('--stick-radius', type=float,
+                   help="ligand and side-chain stick radius, Å (default: the style's)")
     p.add_argument('--sphere-scale', type=float, default=0.3, help='non-metal spheres')
     p.add_argument('--metal-scale', type=float, default=0.5, help='metal spheres')
-    p.add_argument('--max-cos', type=float, default=0.6,
-                   help='keep the view at least arccos(this) off the metals-to-ligand '
-                        'axis, so the ligand sits beside the metals, not on them')
+    p.add_argument('--min-spread', type=float, default=2.0,
+                   help='smallest radius of gyration (Å) the ligand may have in the '
+                        'picture, so it is not seen edge-on')
     p.add_argument('--contact', type=float, default=2.6,
                    help='metal-coordination distance, Å')
     p.add_argument('--clip', type=float,
@@ -108,6 +111,9 @@ def setup_scene(args, atoms):
     sidechains = '(%s) and (sidechain or name CA) and not hydro' % coord
     cmd.show('sticks', sidechains)
     cmd.color('atomic', '(%s) and not elem C' % sidechains)          # carbons keep the protein color
+    if args.stick_radius:
+        for sel in [sidechains] + ['cx and resi %s' % resi for resi, _ in args.ligand]:
+            cmd.set_bond('stick_radius', args.stick_radius, sel)
     cmd.show('spheres', spheres)
     cmd.set('sphere_scale', args.sphere_scale, spheres)
     cmd.set('sphere_scale', args.metal_scale, spheres + ' and metals')
@@ -144,13 +150,19 @@ def draw_coordination(pairs):
     cmd.set('dash_round_ends', 1)
 
 
-def choose_view(loop, site, metals, ligand, occluders, max_cos):
-    """Camera rotation: from the site's most open side that keeps the ligand beside
-    the metals, metals level, ligand above."""
+def choose_view(loop, site, metals, spheres, sidechains, ligand, cartoon, min_spread):
+    """Camera rotation looking at the site with as little of it hidden as possible:
+    site atoms behind the cartoon, and metals or side chains behind the ligand (the
+    metals count triple); the ligand must not be seen edge-on. Metals level, ligand
+    above."""
     mean = loop.mean(axis=0)
     center = mean[site].mean(axis=0)
-    axis = mean[ligand].mean(axis=0) - mean[metals].mean(axis=0)
-    d = clear_view(mean[occluders], center, across=axis, max_cos=max_cos)
+    dirs = fibonacci_sphere(4000)
+    hidden = (hidden_counts(mean[cartoon], mean[site], dirs, 2.5)
+              + 3 * hidden_counts(mean[ligand], mean[spheres], dirs, 1.6)
+              + hidden_counts(mean[ligand], mean[sidechains], dirs, 1.6))
+    hidden = np.where(projected_spread(mean[ligand], dirs) >= min_spread, hidden, np.inf)
+    d = dirs[np.argmin(hidden)]
     m = mean[metals] - mean[metals].mean(axis=0)
     along = np.linalg.svd(m, full_matrices=False)[2][0]     # the metals' long axis
     return view_basis(d, along, mean[ligand].mean(axis=0) - center)
@@ -203,8 +215,9 @@ def main():
     sidechains, site, residues = setup_scene(args, atoms)
     site_idx, metals = indices(site), indices('(%s) and metals' % args.spheres)
     shown = np.union1d(shown, site_idx)
-    occluders = indices('polymer.protein and not hydro and not (%s)' % sidechains)
-    rot = choose_view(loop, site_idx, metals, lig, occluders, args.max_cos)
+    cartoon = indices('polymer.protein and name N+CA+C+O and not (byres (%s))' % sidechains)
+    rot = choose_view(loop, site_idx, metals, indices(args.spheres), indices(sidechains),
+                      lig, cartoon, args.min_spread)
     loop = (loop @ rot.T).astype(np.float32)
     cmd.load_coordset(loop[0], 'cx', state=1)
     partners = indices('not hydro and not metals and (polymer.protein or (%s) or %s)'
