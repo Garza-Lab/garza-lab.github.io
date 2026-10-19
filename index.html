@@ -48,6 +48,13 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 /* E6 reaches down to 83% of its frame, i.e. .83 - (1 - overlap) = .27 of the video
    into the band; the band's text starts just below that. */
 .md-band{padding-top:calc(var(--md-size) * .27 + 48px) !important}
+/* The band runs to the bottom of the first screen: --band-top (set by the script below)
+   is where the band starts on the page, so the hero + band exactly fill the viewport at
+   load. The text is centred in the black space under the protein. */
+.md-band{min-height:calc(100vh - var(--band-top,0px));min-height:calc(100svh - var(--band-top,0px));display:flex;flex-direction:column;justify-content:center}
+/* Lead text: the original size unless the script below finds spare black space on the
+   first screen, in which case --lead-size is the largest size (up to 76px) that still fits. */
+.md-band-lead{font-size:var(--lead-size,clamp(30px,4.6vw,58px))}
 .md-band-text{max-width:none}
 @media (max-width:760px){
   :root{--md-size:min(85vw,calc(100vw - 64px));--md-overlap:.36}
@@ -70,6 +77,22 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 @media (max-width:600px){.team-grid{grid-template-columns:1fr;gap:48px}}
 </style>
 <script>if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&'IntersectionObserver' in window)document.documentElement.classList.add('site-anim');</script>
+<script>
+/* Home: record where the black band starts so CSS can stretch it to the bottom of the first
+   screen, then grow the lead text into any spare black space (never below its original size). */
+(function(){var t=0,root=document.documentElement;
+function set(){t=0;var b=document.querySelector('.md-band'),p=b&&b.querySelector('.md-band-lead');
+if(!b||!p){root.style.removeProperty('--lead-size');return;}
+var top=Math.round(b.getBoundingClientRect().top+window.scrollY);root.style.setProperty('--band-top',top+'px');
+root.style.removeProperty('--lead-size');
+var cs=getComputedStyle(b),room=root.clientHeight-top-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),
+lo=parseFloat(getComputedStyle(p).fontSize),hi=76;if(!(p.offsetHeight<room&&lo<hi))return;
+for(var i=0;i<10;i++){var m=(lo+hi)/2;root.style.setProperty('--lead-size',m+'px');if(p.offsetHeight<=room)lo=m;else hi=m;}
+root.style.setProperty('--lead-size',Math.floor(lo)+'px');}
+function q(){if(!t)t=setTimeout(set,0);}
+new MutationObserver(q).observe(root,{childList:true,subtree:true});
+addEventListener('resize',q);addEventListener('load',q);if(document.fonts)document.fonts.ready.then(q);})();
+</script>
 </helmet>
 <div style="min-height:100vh;display:flex;flex-direction:column;background:var(--color-bg);color:var(--color-text)">
 
@@ -104,7 +127,7 @@ a{color:var(--color-text);text-underline-offset:3px}a:hover{color:var(--color-te
 
   <section class="md-band" style="margin-inline:calc(50% - 50vw);padding:80px max(32px, calc(50vw - 568px)) 96px;background:#000;color:#fbfbfe">
     <div class="md-band-text">
-      <p style="font-size:clamp(30px,4.6vw,58px);font-weight:500;line-height:1.18;letter-spacing:-.025em;margin:0;text-wrap:pretty">Leveraging computational chemistry to study protein dynamics and design novel therapeutics for complex biological targets.</p>
+      <p class="md-band-lead" style="font-weight:500;line-height:1.16;letter-spacing:-.025em;margin:0;text-wrap:pretty">Leveraging computational chemistry to study protein dynamics and design novel therapeutics for complex biological targets.</p>
     </div>
   </section>
 
