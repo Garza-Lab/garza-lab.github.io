@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>The Garza Lab</title>
+  <script>
+    // GitHub Pages serves this for any path without a file, e.g. /research. Hand the path to
+    // the site, which shows that page at its clean URL (see index.html). Unknown paths land on home.
+    var p = location.pathname.replace(/^\/+|\/+$/g, '');
+    var pages = ['home', 'research', 'team', 'publications', 'news', 'contact'];
+    location.replace('/' + (pages.indexOf(p) >= 0 ? '?p=' + p : ''));
+  </script>
+</head>
+<body></body>
+</html>
