@@ -3,6 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <base href="/">
+  <script>
+    // Pages live at /home, /research, ... GitHub Pages has no rewrites, so 404.html sends
+    // /research here as /?p=research; old #research links still work. Restore the clean path.
+    (function () {
+      var q = new URLSearchParams(location.search).get('p');
+      var h = location.hash.slice(1);
+      var p = q !== null ? q : h;
+      if (['home','research','team','publications','news','contact'].indexOf(p) >= 0) history.replaceState(null, '', '/' + p);
+    })();
+  </script>
   <title>The Garza Lab</title>
   <script src="./support.js"></script>
   <link rel="icon" type="image/x-icon" href="uploads/icons/Icon2.png">
@@ -99,13 +110,13 @@ addEventListener('resize',q);addEventListener('load',q);if(document.fonts)docume
 <div style="min-height:100vh;display:flex;flex-direction:column;background:var(--color-bg);color:var(--color-text)">
 
 <nav style="display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;padding:14px 32px;background:color-mix(in srgb, var(--color-bg) 85%, transparent);backdrop-filter:blur(12px);max-width:1200px;width:100%;margin:0 auto">
-  <a href="#home" onClick="{{ go.home }}" style="font-weight:500;font-size:28.5px;letter-spacing:-.01em;color:var(--color-text);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:10px">Garza Lab</a>
-  <a href="#home" onClick="{{ go.home }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.home }}" style-hover="text-decoration:underline">Home</a>
-  <a href="#research" onClick="{{ go.research }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.research }}" style-hover="text-decoration:underline">Research</a>
-  <a href="#team" onClick="{{ go.team }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.team }}" style-hover="text-decoration:underline">Team</a>
-  <a href="#publications" onClick="{{ go.publications }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.publications }}" style-hover="text-decoration:underline">Publications</a>
-  <a href="#news" onClick="{{ go.news }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.news }}" style-hover="text-decoration:underline">News</a>
-  <a href="#contact" onClick="{{ go.contact }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.contact }}" style-hover="text-decoration:underline">Contact</a>
+  <a href="/home" onClick="{{ go.home }}" style="font-weight:500;font-size:28.5px;letter-spacing:-.01em;color:var(--color-text);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:10px">Garza Lab</a>
+  <a href="/home" onClick="{{ go.home }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.home }}" style-hover="text-decoration:underline">Home</a>
+  <a href="/research" onClick="{{ go.research }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.research }}" style-hover="text-decoration:underline">Research</a>
+  <a href="/team" onClick="{{ go.team }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.team }}" style-hover="text-decoration:underline">Team</a>
+  <a href="/publications" onClick="{{ go.publications }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.publications }}" style-hover="text-decoration:underline">Publications</a>
+  <a href="/news" onClick="{{ go.news }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.news }}" style-hover="text-decoration:underline">News</a>
+  <a href="/contact" onClick="{{ go.contact }}" style="font-size:25.5px;font-weight:500;letter-spacing:-.02em;text-decoration:none;color:{{ navColor.contact }}" style-hover="text-decoration:underline">Contact</a>
 </nav>
 
 <main ref="{{ mainRef }}" style="flex:1;width:100%">
@@ -513,6 +524,7 @@ addEventListener('resize',q);addEventListener('load',q);if(document.fonts)docume
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;animationSpeed&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;fast&quot;,&quot;medium&quot;,&quot;slow&quot;],&quot;default&quot;:&quot;medium&quot;,&quot;tsType&quot;:&quot;'fast' | 'medium' | 'slow'&quot;,&quot;section&quot;:&quot;Motion&quot;}}">
 const PAGES = ['home','research','team','publications','news','contact'];
+const pageFromPath = () => { const p = location.pathname.replace(/^\/+|\/+$/g, ''); return PAGES.includes(p) ? p : 'home'; };
 const U = 'https://garzalab.weebly.com/uploads/1/5/5/1/155162279/';
 const PUBS = [
   {year:2026,title:'Quantitative Analysis of Flavonoid Binding to Tyrosinase by Quartz Crystal Microbalance and Molecular Dynamics',authors:'Ita Junhee Lee, Ian Tam, Ryan M Mooney, Tenley Overdeck, Liam Kwak, Roberto A Garza-López, Malkiat S Johal',journal:'Langmuir',ref:'Article ASAP',doi:'10.1021/acs.langmuir.6c04466',url:'https://doi.org/10.1021/acs.langmuir.6c04466'},
@@ -537,14 +549,14 @@ const ALUMNI = [
   ['Theo Brown','https://www.linkedin.com/in/000theobrown/'],['Dr. Joseph Chang','https://www.linkedin.com/in/joseph-chang-74691419/'],['Dr. Raul Sun Hun Chang','https://www.linkedin.com/in/raul-sun-han-chang-phd-11367a96/'],['Lawrence Chen','https://www.linkedin.com/in/lawrence-chen-422304138/'],['Young Su Ko','https://www.linkedin.com/in/young-su-ko/'],['Dr. Sabari Kumar','https://bioenergy-kimlab.org/sabari-kumar-joined-as-a-new-phd-graduate-student/'],['Dr. Christopher Lee','https://imagingpartners.com/about-us/our-doctors/christopher-lee/'],['Kaitlyn Lee',null],['Dr. David Niu','https://healthy.kaiserpermanente.org/southern-california/physicians/david-niu-1688462'],['Matthew Paik','https://www.linkedin.com/in/mattpaik/'],['Dr. Arthur Partikian','https://uscpediatrics.com/neurology'],['Dr. David Siew','https://www.evergreenhealth.com/find-a-doctor/profile/david-siew-hospitalist/'],['Dr. Joseph Tseng','https://healthy.kaiserpermanente.org/southern-california/physicians/joseph-tseng-4048484'],['Dr. Sagar Vasandani','https://www.researchgate.net/profile/Sagar-Vasandani'],['Dr. Johnny Wang',null],
 ];
 class Component extends DCLogic {
-  state = { page: PAGES.includes(location.hash.slice(1)) ? location.hash.slice(1) : 'home' };
+  state = { page: pageFromPath() };
   componentDidMount() {
-    this._onHash = () => { const h = location.hash.slice(1); if (PAGES.includes(h)) this.setState({ page: h }); };
-    window.addEventListener('hashchange', this._onHash);
+    this._onPop = () => this.setState({ page: pageFromPath() });
+    window.addEventListener('popstate', this._onPop);
     this._bindAnim();
     this._bindLoops();
   }
-  componentWillUnmount() { window.removeEventListener('hashchange', this._onHash); if (this._io) this._io.disconnect(); }
+  componentWillUnmount() { window.removeEventListener('popstate', this._onPop); if (this._io) this._io.disconnect(); }
   componentDidUpdate() { this._bindAnim(); this._bindLoops(); }
   // MD movie loops (<video data-md="path/name">) with transparent backgrounds. WebKit
   // (Safari and every iPhone/iPad browser) only shows video alpha in HEVC (name.mov);
@@ -598,7 +610,7 @@ class Component extends DCLogic {
       this._io.observe(el);
     });
   }
-  nav(p) { return (e) => { e.preventDefault(); if (location.hash !== '#' + p) history.pushState(null, '', '#' + p); this.setState({ page: p }); window.scrollTo(0, 0); }; }
+  nav(p) { return (e) => { e.preventDefault(); if (location.pathname !== '/' + p) history.pushState(null, '', '/' + p); this.setState({ page: p }); window.scrollTo(0, 0); }; }
   renderVals() {
     const page = this.state.page;
     const variant = (this.props.homeVariant ?? 'A').toUpperCase();
