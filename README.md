@@ -1,3 +1,3 @@
-# Garza Lab website
+# Garza Lab Website
 
-Live site: https://garza-lab.com
+https://garza-lab.com
